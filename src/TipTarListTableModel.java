@@ -13,20 +13,20 @@ import javax.swing.table.AbstractTableModel;
 
 import com.sun.rowset.CachedRowSetImpl;
 
-public class CourseListTableModel extends AbstractTableModel {
+public class TipTarListTableModel extends AbstractTableModel {
 	String url="jdbc:mysql://localhost:3306/";
 	String dbname="toadv2";
 	String regla="?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	String username="root";
 	String pass="";
-    CachedRowSet courseListRowSet; // Contains data
+    CachedRowSet GenListRowSet; // Contains data
     ResultSetMetaData metadata; // Additional info about the data
     Connection connection;
     Statement statement;
     int numcols, numrows; // Number of rows and columns
 
     // Constructor used to connect to the database
-    public CourseListTableModel() {
+    public TipTarListTableModel() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
         } catch (Exception e) {
@@ -47,30 +47,30 @@ public class CourseListTableModel extends AbstractTableModel {
         
         try {
             connection.setAutoCommit(false);
-            courseListRowSet = new CachedRowSetImpl();
-            courseListRowSet.setType(ResultSet.TYPE_SCROLL_INSENSITIVE);
-            courseListRowSet.setConcurrency(ResultSet.CONCUR_UPDATABLE);
-            courseListRowSet.setCommand("SELECT * FROM sexo");
-            courseListRowSet.execute(connection);
+            GenListRowSet = new CachedRowSetImpl();
+            GenListRowSet.setType(ResultSet.TYPE_SCROLL_INSENSITIVE);
+            GenListRowSet.setConcurrency(ResultSet.CONCUR_UPDATABLE);
+            GenListRowSet.setCommand("SELECT * FROM tipo_tarea");
+            GenListRowSet.execute(connection);
             
-            metadata = courseListRowSet.getMetaData();
+            metadata = GenListRowSet.getMetaData();
             numcols = metadata.getColumnCount();
-            numrows = courseListRowSet.size();
-            courseListRowSet.first();
+            numrows = GenListRowSet.size();
+            GenListRowSet.first();
         } catch (SQLException exp) {
             exp.printStackTrace();
         }
     }
 
     // Constructor that uses a RowSet and a database connection
-    public CourseListTableModel(RowSet rowSet, Connection conn) {
+    public TipTarListTableModel(RowSet rowSet, Connection conn) {
         try {
-            courseListRowSet = (CachedRowSet) rowSet;
-            courseListRowSet.setType(ResultSet.TYPE_SCROLL_INSENSITIVE);
-            courseListRowSet.setConcurrency(ResultSet.CONCUR_UPDATABLE);
-            metadata = courseListRowSet.getMetaData();
+            GenListRowSet = (CachedRowSet) rowSet;
+            GenListRowSet.setType(ResultSet.TYPE_SCROLL_INSENSITIVE);
+            GenListRowSet.setConcurrency(ResultSet.CONCUR_UPDATABLE);
+            metadata = GenListRowSet.getMetaData();
             numcols = metadata.getColumnCount();
-            numrows = courseListRowSet.size();
+            numrows = GenListRowSet.size();
             connection = conn;
         } catch(SQLException exp) {
             exp.printStackTrace();
@@ -90,12 +90,12 @@ public class CourseListTableModel extends AbstractTableModel {
     // Gets the value of an object at a given row and column
     public Object getValueAt(int row, int col) {
         try {
-            if (row >= courseListRowSet.size())
+            if (row >= GenListRowSet.size())
                 //Error: Trying to access a deleted row
                 return null;
 
-            courseListRowSet.absolute(row + 1);
-            Object obj = courseListRowSet.getObject(col + 1);
+            GenListRowSet.absolute(row + 1);
+            Object obj = GenListRowSet.getObject(col + 1);
             if (obj == null)
                 return null;
             else
@@ -123,9 +123,9 @@ public class CourseListTableModel extends AbstractTableModel {
     // Sets the value of an object at a given row and column
     public void setValueAt(Object aValue, int row, int col) {
         try {
-            courseListRowSet.moveToInsertRow();
+            GenListRowSet.moveToInsertRow();
             System.out.println(aValue + " setValueAt " + (row+1) + " " + (col+1));
-            courseListRowSet.updateObject(col+1, (String) aValue);
+            GenListRowSet.updateObject(col+1, (String) aValue);
         } catch (SQLException err) {
             err.getMessage();
             err.printStackTrace();
@@ -141,9 +141,9 @@ public class CourseListTableModel extends AbstractTableModel {
                 // Database is empty, so the desired primary key does not exist
                 return false;
 
-            courseListRowSet.beforeFirst();
-            while (courseListRowSet.next()) {
-                if (courseListRowSet.getString("course_number").equals(array[1]))
+            GenListRowSet.beforeFirst();
+            while (GenListRowSet.next()) {
+                if (GenListRowSet.getString("TipTarCod").equals(array[1]))
                     // Desired primary key is in the database
                     return true;
             }
@@ -161,26 +161,23 @@ public class CourseListTableModel extends AbstractTableModel {
     public void addRow(Object[] array) {
         try {
 
-            if(!isValidEnrollmentField(array))
-                // Invalid information entered in to Enrollment field
-                return;
-
+           
             // Insert the row if the desired primary key is not already in use
             if (!isPrimaryKeyInDB(array)) {
-                courseListRowSet.last();
-                courseListRowSet.moveToInsertRow();
-                courseListRowSet.updateString("course_name", (String) array[0]);
-                courseListRowSet.updateString("course_number", (String) array[1]);
-                courseListRowSet.updateInt("enrollment", Integer.valueOf((String) array[2]).intValue());
-                courseListRowSet.updateString("start_date", (String) array[3]);
-                courseListRowSet.updateString("end_date", (String) array[4]);
-                courseListRowSet.insertRow();
-                courseListRowSet.moveToCurrentRow();
-                courseListRowSet.acceptChanges(connection);
+                GenListRowSet.last();
+                GenListRowSet.moveToInsertRow();
+                GenListRowSet.updateString("TipTarDes", (String) array[0]);
+                GenListRowSet.updateString("TipTarCod", (String) array[1]);
+                GenListRowSet.updateString("TipTarSexCod", (String) array[2]);
+                GenListRowSet.updateString("TipTarEstReg", (String) array[3]);
+                
+                GenListRowSet.insertRow();
+                GenListRowSet.moveToCurrentRow();
+                GenListRowSet.acceptChanges(connection);
             } else {
                 // Error: User's desired primary key is already in the database
                 JOptionPane.showMessageDialog(null,
-                        "Cannot have multiple records with the same primary key (course_number).",
+                        "Cannot have multiple records with the same primary key (Gen_number).",
                         "Primary Key Error", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -193,14 +190,17 @@ public class CourseListTableModel extends AbstractTableModel {
     // Deletes a row from the database
     public void deleteRow(Object[] array) {
         try {
-            courseListRowSet.beforeFirst();
-            while (courseListRowSet.next()) {
-                if (courseListRowSet.getString("course_number").equals(array[1])) {
-                    courseListRowSet.deleteRow();
+            GenListRowSet.beforeFirst();
+            while (GenListRowSet.next()) {
+                if (GenListRowSet.getString("TipTarCod").equals(array[1])) {
+                	GenListRowSet.updateString("TipTarEstReg", "*");
+                    
+                    GenListRowSet.updateRow();
+                    GenListRowSet.first();
                     break;
                 }
             }
-            courseListRowSet.acceptChanges(connection);
+            GenListRowSet.acceptChanges(connection);
         } catch(SQLException err) {
             err.getMessage();
             err.printStackTrace();
@@ -216,36 +216,35 @@ public class CourseListTableModel extends AbstractTableModel {
                 // Error: No row is selected for updating. This error is quietly handled.
                 return;
 
-            if(!isValidEnrollmentField(array))
-                return;
+            
 
             // Move to the selected row
-            courseListRowSet.absolute(jtable.getSelectedRow() + 1);
+            GenListRowSet.absolute(jtable.getSelectedRow() + 1);
 
-            // Current course number in the selected row
-            String selectedCourseNumber = courseListRowSet.getString("course_number");
+            // Current Gen number in the selected row
+            String selectedGenNumber = GenListRowSet.getString("TipTarCod");
 
-            // Course number entered into the text field
-            String desiredCourseNumber = (String) array[1];
+            // Gen number entered into the text field
+            String desiredGenNumber = (String) array[1];
 
             // Update the row if the desired primary key is not in the database, or the desired primary key is in the
             // database, but the row's primary key is not being updated
-            if (!isPrimaryKeyInDB(array) || desiredCourseNumber.equals(selectedCourseNumber)) {
-                courseListRowSet.absolute(jtable.getSelectedRow() + 1);
-                courseListRowSet.updateString("course_name", (String) array[0]);
-                courseListRowSet.updateString("course_number", (String) array[1]);
-                courseListRowSet.updateInt("enrollment", Integer.valueOf((String) array[2]).intValue());
-                courseListRowSet.updateString("start_date", (String) array[3]);
-                courseListRowSet.updateString("end_date", (String) array[4]);
-                courseListRowSet.updateRow();
-                courseListRowSet.first();
-                courseListRowSet.acceptChanges(connection);
+            if (!isPrimaryKeyInDB(array) || desiredGenNumber.equals(selectedGenNumber)) {
+                GenListRowSet.absolute(jtable.getSelectedRow() + 1);
+                GenListRowSet.updateString("TipTarDes", (String) array[0]);
+                GenListRowSet.updateString("TipTarCod", (String) array[1]);
+                GenListRowSet.updateString("TipTarSexCod", (String) array[2]);
+                GenListRowSet.updateString("TipTarEstReg", (String) array[3]);
+                
+                GenListRowSet.updateRow();
+                GenListRowSet.first();
+                GenListRowSet.acceptChanges(connection);
                 return;
             }
 
             // Error: User is trying to change the primary key to a new primary key already in the database
             JOptionPane.showMessageDialog(null,
-                    "Cannot have multiple records with the same primary key (course_number).",
+                    "Cannot have multiple records with the same primary key (SexCod).",
                     "Primary Key Error", JOptionPane.ERROR_MESSAGE);
 
         } catch(SQLException err) {
@@ -254,9 +253,49 @@ public class CourseListTableModel extends AbstractTableModel {
         }
     }
     
+    // Activate a row from the database
+    public void activateRow(Object[] array) {
+        try {
+            GenListRowSet.beforeFirst();
+            while (GenListRowSet.next()) {
+                if (GenListRowSet.getString("TipTarCod").equals(array[1])) {
+                	GenListRowSet.updateString("TipTarEstReg", "A");
+                    
+                    GenListRowSet.updateRow();
+                    GenListRowSet.first();
+                    break;
+                }
+            }
+            GenListRowSet.acceptChanges(connection);
+        } catch(SQLException err) {
+            err.getMessage();
+            err.printStackTrace();
+        }
+    }
+    
+    // Inactivate a row from the database
+    public void inactivateRow(Object[] array) {
+        try {
+            GenListRowSet.beforeFirst();
+            while (GenListRowSet.next()) {
+                if (GenListRowSet.getString("TipTarCod").equals(array[1])) {
+                	GenListRowSet.updateString("TipTarEstReg", "I");
+                    
+                    GenListRowSet.updateRow();
+                    GenListRowSet.first();
+                    break;
+                }
+            }
+            GenListRowSet.acceptChanges(connection);
+        } catch(SQLException err) {
+            err.getMessage();
+            err.printStackTrace();
+        }
+    }
+    
     // Returns the current CachedRowSet in the TableModel
     public CachedRowSet getRowSet() {
-        return courseListRowSet;
+        return GenListRowSet;
     }
     
     // Helps preserve the old connection for the new TableModel
@@ -265,22 +304,12 @@ public class CourseListTableModel extends AbstractTableModel {
     }
 
     // Checks if the enrollment field is an integer
-    public boolean isValidEnrollmentField(Object[] array) {
-        try {
-            Integer.valueOf((String) array[2]).intValue();
-            return true;
-        } catch(NumberFormatException err) {
-            JOptionPane.showMessageDialog(null,
-                    "Enrollment field must be an integer.",
-                    "Number Format Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-    }
+   
     
     public static void main(String[] args) {
         // TODO code application logic here
-        CourseListGUI courseListGUI = new CourseListGUI();
-        courseListGUI.setVisible(true);
+        TipTarListGUI TipTarListGUI = new TipTarListGUI();
+        TipTarListGUI.setVisible(true);
     }
     
 }

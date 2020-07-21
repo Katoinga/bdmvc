@@ -9,15 +9,15 @@ import javax.swing.table.TableModel;
 
 
 
-public class CourseListTableController implements ListSelectionListener, RowSetListener {
+public class TipTarListTableController implements ListSelectionListener, RowSetListener {
     
-    private CourseListTableModel tableModel = null;
-    private CourseListGUI gui;
+    private TipTarListTableModel tableModel = null;
+    private TipTarListGUI gui;
     
-    public CourseListTableController(CourseListGUI gui) {
+    public TipTarListTableController(TipTarListGUI gui) {
         this.gui = gui;
         // Create the tableModel using the data in the cachedRowSet
-        tableModel = new CourseListTableModel();
+        tableModel = new TipTarListTableModel();
         tableModel.getRowSet().addRowSetListener(this);
     }
     
@@ -42,27 +42,36 @@ public class CourseListTableController implements ListSelectionListener, RowSetL
                 return;
 
             // Read the data in each column using getValue and display it on corresponding text field
-            gui.setCourseNameTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setCourseNumberTextField((String) tableModel.getValueAt(firstIndex, 1));
-            gui.setEnrollmentTextField((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setStartDateTextField((String) tableModel.getValueAt(firstIndex, 3));
-            gui.setEndDateTextField((String) tableModel.getValueAt(firstIndex, 4));
+            gui.setGenNameTextField((String) tableModel.getValueAt(firstIndex, 1));
+            gui.setGenNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
+            gui.setGenTipTarSexCodTextField((String) tableModel.getValueAt(firstIndex, 2));
+            gui.setGenTipTarEstRegTextField((String) tableModel.getValueAt(firstIndex, 3));
         }
     }
 
-    // Add a row to the database using addRow() in CourseListTableModel
+    // Add a row to the database using addRow() in TipTarTableModel
     public void addRow(String[] array) {
         tableModel.addRow(array);
     }
 
-    // Delete a row to the database using deleteRow() in CourseListTableModel
+    // Delete a row to the database using deleteRow() in TipTarTableModel
     public void deleteRow(String[] array) {
         tableModel.deleteRow(array);
     }
 
-    // Update a row to the database using updateRow() in CourseListTableModel
+    // Update a row to the database using updateRow() in TipTarTableModel
     public void updateRow(String[] array, JTable jtable) {
         tableModel.updateRow(array, jtable);
+    }
+    
+    // Activate a row to the database using updateRow() in TipTarTableModel
+    public void activateRow(String[] array) {
+        tableModel.activateRow(array);
+    }
+    
+    // Inactivate a row to the database using updateRow() in TipTarTableModel
+    public void inactivateRow(String[] array) {
+        tableModel.inactivateRow(array);
     }
 
     // Method from the RowSetListener Interface
@@ -70,23 +79,22 @@ public class CourseListTableController implements ListSelectionListener, RowSetL
     public void rowChanged(RowSetEvent event) {
         try {
             // Get the index of the inserted row
-            // getRowSet() is a method in CourseListTableModel that returns a CachedRowSet object
+            // getRowSet() is a method in TipTarTableModel that returns a CachedRowSet object
             // getRow() is a method in ResultSet that returns the current row
             tableModel.getRowSet().moveToCurrentRow();
             int firstIndex = tableModel.getRowSet().getRow();
 
             // Create a new table model with the new data
-            tableModel = new CourseListTableModel(tableModel.getRowSet(), tableModel.getConnection());
+            tableModel = new TipTarListTableModel(tableModel.getRowSet(), tableModel.getConnection());
 
             //update the JTable with the data
             gui.updateTable();
 
             // Read the data in each column using getValueAt and display it on the corresponding text field
-            gui.setCourseNameTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setCourseNumberTextField((String) tableModel.getValueAt(firstIndex, 1));
-            gui.setEnrollmentTextField((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setStartDateTextField((String) tableModel.getValueAt(firstIndex, 3));
-            gui.setEndDateTextField((String) tableModel.getValueAt(firstIndex, 4));
+            gui.setGenNameTextField((String) tableModel.getValueAt(firstIndex, 1));
+            gui.setGenNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
+            gui.setGenTipTarSexCodTextField((String) tableModel.getValueAt(firstIndex, 2));
+            gui.setGenTipTarEstRegTextField((String) tableModel.getValueAt(firstIndex, 3));
         } catch (Exception exp) {
             exp.getMessage();
             exp.printStackTrace();

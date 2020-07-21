@@ -1,8 +1,16 @@
-import javax.swing.*;
-import javax.swing.table.*;
-import java.sql.*;
-import javax.sql.*;
-import javax.sql.rowset.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.sql.RowSet;
+import javax.sql.rowset.CachedRowSet;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+
 import com.sun.rowset.CachedRowSetImpl;
 
 public class NacListTableModel extends AbstractTableModel {
