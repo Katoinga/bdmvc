@@ -5,18 +5,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-public class TipTarListGUI extends javax.swing.JFrame {
+public class CinListGUI extends javax.swing.JFrame {
 
     private JTable jtable1; // The table displayed on the GUI
-    private TipTarListTableController tipTarListTableController = null;
+    private CinListTableController cinListTableController = null;
 
-    public TipTarListGUI() {
+    public CinListGUI() {
         
         // This method creates the labels and text fields on the GUI
         initComponents();
         
         // Creates a controller for the table
-        tipTarListTableController = new TipTarListTableController(this);
+        cinListTableController = new CinListTableController(this);
 
         // Add a table JTable to the GUI
         addJTable();
@@ -25,10 +25,10 @@ public class TipTarListGUI extends javax.swing.JFrame {
     
     public void addJTable() {
         // Add the data and column names to a JTable
-        jtable1 = new JTable(tipTarListTableController.getTableModel());
+        jtable1 = new JTable(cinListTableController.getTableModel());
     
         // Add a ListSelectionListener to the table
-        jtable1.getSelectionModel().addListSelectionListener(tipTarListTableController);
+        jtable1.getSelectionModel().addListSelectionListener(cinListTableController);
         
         // Add the table to a scrollpane
         JScrollPane scrollpane = new JScrollPane(jtable1);
@@ -44,21 +44,23 @@ public class TipTarListGUI extends javax.swing.JFrame {
 
     // Update the JTable
     public void updateTable() {
-        jtable1.setModel(tipTarListTableController.getTableModel());
+        jtable1.setModel(cinListTableController.getTableModel());
     }
 
     // Set data on the GenNameTextField
-    public void setGenNameTextField(String name) {   GenNameTextField.setText(name);    }
+    public void setGenNameTextField(String name) {   GenNameTextField.setText(name);     }
 
     // Set data on the GenNumberTextField
     public void setGenNumberTextField(String value) { GenNumberTextField.setText(value); }
     
-    // Set data on the GenTipTarSexCodTextField
-    public void setGenTipTarSexCodTextField(String value) { GenTipTarSexCodTextField.setText(value); }
+    // Set data on the GenCinCiuTextField
+    public void setGenCinCiuTextField(String value) { GenCinCiuTextField.setText(value); }
     
- // Set data on the GenTipTarSexCodTextField
-    public void setGenTipTarEstRegTextField(String value) { GenTipTarEstRegTextField.setText(value); }
+    // Set data on the GenTipTarSexCodTextField
+    public void setGenCinDirTextField(String value) { GenCinDirTextField.setText(value); }
 
+    // Set data on the GenTipTarSexCodTextField
+    public void setGenCinEstRegTextField(String value) { GenCinEstRegTextField.setText(value); }
     // Set data on the enrollmentTextField
     
 
@@ -80,13 +82,16 @@ public class TipTarListGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         GenNameLabel = new javax.swing.JLabel();
         GenNumberLabel = new javax.swing.JLabel();
-        GenTipTarSexCodLabel = new javax.swing.JLabel();
-        GenTipTarEstRegLabel = new javax.swing.JLabel();
+        GenCinCiuLabel = new javax.swing.JLabel();
+        GenCinDirLabel = new javax.swing.JLabel();
+        GenCinEstRegLabel = new javax.swing.JLabel();
 
         GenNameTextField = new javax.swing.JTextField();
         GenNumberTextField = new javax.swing.JTextField();
-        GenTipTarSexCodTextField = new javax.swing.JTextField();
-        GenTipTarEstRegTextField = new javax.swing.JTextField();
+        GenCinCiuTextField = new javax.swing.JTextField();
+        GenCinDirTextField = new javax.swing.JTextField();
+        GenCinEstRegTextField = new javax.swing.JTextField();
+        
         modButton =new javax.swing.JButton();
         actButton = new javax.swing.JButton();
         inactButton = new javax.swing.JButton();
@@ -104,8 +109,9 @@ public class TipTarListGUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         GenNumberLabel.setText("Codigo:");
         GenNameLabel.setText("Nombre:");
-        GenTipTarSexCodLabel.setText("Codigo Sexo: ");
-        GenTipTarEstRegLabel.setText("Estado Registro: ");
+        GenCinCiuLabel.setText("Ciudad: ");
+        GenCinDirLabel.setText("Direccion: ");
+        GenCinEstRegLabel.setText("Estado del Registro: ");
         
         // Details for the Add button
         addButton.setText("Adicionar");
@@ -185,15 +191,21 @@ public class TipTarListGUI extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(GenTipTarSexCodLabel)
+                    .addComponent(GenCinCiuLabel)
                     .addGap(161, 161, 161)
-                    .addComponent(GenTipTarSexCodTextField)
+                    .addComponent(GenCinCiuTextField)
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(GenTipTarEstRegLabel)
+                    .addComponent(GenCinDirLabel)
                     .addGap(161, 161, 161)
-                    .addComponent(GenTipTarEstRegTextField)
+                    .addComponent(GenCinDirTextField)
+                    .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(GenCinEstRegLabel)
+                    .addGap(161, 161, 161)
+                    .addComponent(GenCinEstRegTextField)
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
@@ -243,12 +255,15 @@ public class TipTarListGUI extends javax.swing.JFrame {
                     .addComponent(GenNumberLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(GenTipTarSexCodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(GenTipTarSexCodLabel))
+                        .addComponent(GenCinCiuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(GenCinCiuLabel))
                     .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                          .addComponent(GenTipTarEstRegTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addComponent(GenTipTarEstRegLabel))
+                          .addComponent(GenCinDirTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                         .addComponent(GenCinDirLabel))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(GenCinEstRegTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                       .addComponent(GenCinEstRegLabel))
                 .addGap(18, 18, 18)    
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
@@ -272,7 +287,7 @@ public class TipTarListGUI extends javax.swing.JFrame {
         );
 
         GenListLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        GenListLabel.setText("Tipo Tarea");
+        GenListLabel.setText("Certamen");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -307,26 +322,28 @@ public class TipTarListGUI extends javax.swing.JFrame {
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenTipTarSexCodTextField.getText();
-        array[3] = GenTipTarEstRegTextField.getText();
+        array[2] = GenCinCiuTextField.getText();
+        array[3] = GenCinDirTextField.getText();
+        array[4] = GenCinEstRegTextField.getText();
         
         // Send data to the controller to add it to the model
-        tipTarListTableController.addRow(array);
+        cinListTableController.addRow(array);
     }//GEN-LAST:event_addButtonActionPerformed
 
     // Code for the delete button
     // NEED TO FINISH MAKING THIS. SEE addRow() METHODS IN
-    // TipTarListTableController.java (LINE 65) and CouseListTableModel.java (LINE 149)
+    // cinListTableController.java (LINE 65) and CouseListTableModel.java (LINE 149)
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenTipTarSexCodTextField.getText();
-        array[3] = GenTipTarEstRegTextField.getText();
-        
+        array[2] = GenCinCiuTextField.getText();
+        array[3] = GenCinDirTextField.getText();
+        array[4] = GenCinEstRegTextField.getText();
+
         // Send data to the controller to remove it from the model
-        tipTarListTableController.deleteRow(array);
+        cinListTableController.deleteRow(array);
     }//GEN-LAST:event_deleteButtonActionPerformed
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
         System.exit(0);
@@ -334,42 +351,48 @@ public class TipTarListGUI extends javax.swing.JFrame {
     
     // Code for the activate button
     // NEED TO FINISH MAKING THIS. SEE addRow() METHODS IN
-    // TipTarListTableController.java (LINE 66) and CouseListTableModel.java (LINE 248)
+    // cinListTableController.java (LINE 66) and CouseListTableModel.java (LINE 248)
     private void actButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	 // TODO add your handling code here:
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenTipTarSexCodTextField.getText();
-        array[3] = GenTipTarEstRegTextField.getText();
-        
+        array[2] = GenCinCiuTextField.getText();
+        array[3] = GenCinDirTextField.getText();
+        array[4] = GenCinEstRegTextField.getText();
+
         // Send data to the controller to activate it from the model
-        tipTarListTableController.activateRow(array);
+        cinListTableController.activateRow(array);
     }//GEN-LAST:event_activateButtonActionPerformed
     
     // Code for the inactivate button
     // NEED TO FINISH MAKING THIS. SEE addRow() METHODS IN
-    // TipTarListTableController.java (LINE 71) and CouseListTableModel.java (LINE 268)
+    // cinListTableController.java (LINE 71) and CouseListTableModel.java (LINE 268)
     private void inactButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	 // TODO add your handling code here:
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenTipTarSexCodTextField.getText();
-        array[3] = GenTipTarEstRegTextField.getText();
+        array[2] = GenCinCiuTextField.getText();
+        array[3] = GenCinDirTextField.getText();
+        array[4] = GenCinEstRegTextField.getText();
+
         // Send data to the controller to inactivate it from the model
-        tipTarListTableController.inactivateRow(array);
+        cinListTableController.inactivateRow(array);
     }//GEN-LAST:event_inactivateButtonActionPerformed
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	GenNumberTextField.enable();
     	GenNameTextField.enable();
-    	GenTipTarSexCodTextField.enable();
-    	GenTipTarEstRegTextField.enable();
+    	GenCinCiuTextField.enable();
+    	GenCinDirTextField.enable();
+    	GenCinEstRegTextField.enable();
+
     	GenNameTextField.setText("");
     	GenNumberTextField.setText("");
-    	GenTipTarSexCodTextField.setText("");
-    	GenTipTarEstRegTextField.setText("");
+    	GenCinCiuTextField.setText("");
+    	GenCinDirTextField.setText("");
+    	GenCinEstRegTextField.setText("");
     }
     // Code for the update button
     private void modButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -377,9 +400,11 @@ public class TipTarListGUI extends javax.swing.JFrame {
     	String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenTipTarSexCodTextField.getText();
-        array[3] = GenTipTarEstRegTextField.getText();
-        tipTarListTableController.updateRow(array, jtable1);
+        array[2] = GenCinCiuTextField.getText();
+        array[3] = GenCinDirTextField.getText();
+        array[4] = GenCinEstRegTextField.getText();
+
+        cinListTableController.updateRow(array, jtable1);
         
     }
     
@@ -388,10 +413,12 @@ public class TipTarListGUI extends javax.swing.JFrame {
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenTipTarSexCodTextField.getText();
-        array[3] = GenTipTarEstRegTextField.getText();
+        array[2] = GenCinCiuTextField.getText();
+        array[3] = GenCinDirTextField.getText();
+        array[4] = GenCinEstRegTextField.getText();
+
         // Send data to the controller to update it in the model
-        tipTarListTableController.updateRow(array, jtable1);
+        cinListTableController.updateRow(array, jtable1);
     }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
@@ -411,20 +438,20 @@ public class TipTarListGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TipTarListGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FesListGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TipTarListGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FesListGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TipTarListGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FesListGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TipTarListGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FesListGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TipTarListGUI().setVisible(true);
+                new FesListGUI().setVisible(true);
             }
         });
     }
@@ -432,14 +459,22 @@ public class TipTarListGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JLabel GenListLabel;
+    
     private javax.swing.JLabel GenNameLabel;
     private javax.swing.JTextField GenNameTextField;
+    
     private javax.swing.JLabel GenNumberLabel;
     private javax.swing.JTextField GenNumberTextField;
-    private javax.swing.JLabel GenTipTarSexCodLabel;
-    private javax.swing.JTextField GenTipTarSexCodTextField;
-    private javax.swing.JLabel GenTipTarEstRegLabel;
-    private javax.swing.JTextField GenTipTarEstRegTextField;
+    
+    private javax.swing.JLabel GenCinCiuLabel;
+    private javax.swing.JTextField GenCinCiuTextField;
+    
+    private javax.swing.JLabel GenCinDirLabel;
+    private javax.swing.JTextField GenCinDirTextField;
+    
+    private javax.swing.JLabel GenCinEstRegLabel;
+    private javax.swing.JTextField GenCinEstRegTextField;
+    
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton modButton;
     private javax.swing.JPanel jPanel1;
