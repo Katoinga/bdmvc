@@ -1,6 +1,11 @@
 package otorgo;
 
 import java.awt.BorderLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -50,21 +55,54 @@ public class OtoListGUI extends javax.swing.JFrame {
 
     // Set data on the OtoCodTextField
     public void setOtoCodTextField(String name) {   OtoCodTextField.setText(name);     }
-
-    // Set data on the OtoPelCodTextField
-    public void setOtoPelCodTextField(String value) { OtoPelCodTextField.setText(value); }
-    
-    // Set data on the OtoPreCodTextField
-    public void setOtoPreCodTextField(String value) { OtoPreCodTextField.setText(value); }
-    
-    // Set data on the GenTipTarSexCodTextField
-    public void setOtoCerCodTextField(String value) { OtoCerCodTextField.setText(value); }
-
-    // Set data on the GenTipTarSexCodTextField
-    public void setOtoFesCodTextField(String value) { OtoFesCodTextField.setText(value); }
     
  // Set data on the GenTipTarSexCodTextField
     public void setOtoEstRegTextField(String value) { OtoEstRegTextField.setText(value); }
+    
+ // Set data on the GenCerFesCodTextField
+    public void setOtoPelCodJComboBox(String value) { 
+    	int size = OtoPelCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(OtoPelCodComboBox.getItemAt(c).toString().substring(0,OtoPelCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			OtoPelCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
+    
+    // Set data on the GenCerFesCodTextField
+    public void setOtoPreCodJComboBox(String value) {
+    	int size = OtoPreCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(OtoPreCodComboBox.getItemAt(c).toString().substring(0,OtoPreCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			OtoPreCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
+    
+   // Set data on the GenCerFesCodTextField
+    public void setOtoCerCodJComboBox(String value) {
+    	int size = OtoCerCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(OtoCerCodComboBox.getItemAt(c).toString().substring(0,OtoCerCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			OtoCerCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
+    
+    // Set data on the GenCerFesCodTextField
+    public void setOtoFesCodJComboBox(String value) {
+    	int size = OtoFesCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(OtoFesCodComboBox.getItemAt(c).toString().substring(0,OtoFesCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			OtoFesCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
+    
     // Set data on the enrollmentTextField
     
 
@@ -92,11 +130,13 @@ public class OtoListGUI extends javax.swing.JFrame {
         OtoEstRegLabel = new javax.swing.JLabel();
 
         OtoCodTextField = new javax.swing.JTextField();
-        OtoPelCodTextField = new javax.swing.JTextField();
-        OtoPreCodTextField = new javax.swing.JTextField();
-        OtoCerCodTextField = new javax.swing.JTextField();
-        OtoFesCodTextField = new javax.swing.JTextField();
         OtoEstRegTextField = new javax.swing.JTextField();
+        
+        OtoPelCodComboBox = new javax.swing.JComboBox<String>();
+        OtoPreCodComboBox = new javax.swing.JComboBox<String>();
+        OtoCerCodComboBox = new javax.swing.JComboBox<String>();
+        OtoFesCodComboBox = new javax.swing.JComboBox<String>();
+        remplir_Jcomb();
         
         modButton =new javax.swing.JButton();
         actButton = new javax.swing.JButton();
@@ -113,8 +153,8 @@ public class OtoListGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OtoPelCodLabel.setText("Codigo:");
-        OtoCodLabel.setText("Codigo de la Pelicula:");
+        OtoPelCodLabel.setText("Codigo de la pelicula:");
+        OtoCodLabel.setText("Codigo :");
         OtoPreCodLabel.setText("Codigo del Premio: ");
         OtoCerCodLabel.setText("Codigo del Certamen: ");
         OtoFesCodLabel.setText("Codigo del Festival: ");
@@ -194,25 +234,25 @@ public class OtoListGUI extends javax.swing.JFrame {
                     .addComponent(OtoPelCodLabel))
                 .addGap(147, 147, 147)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(OtoPelCodTextField))
+                    .addComponent(OtoPelCodComboBox))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(OtoPreCodLabel)
                     .addGap(161, 161, 161)
-                    .addComponent(OtoPreCodTextField)
+                    .addComponent(OtoPreCodComboBox)
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(OtoCerCodLabel)
                     .addGap(161, 161, 161)
-                    .addComponent(OtoCerCodTextField)
+                    .addComponent(OtoCerCodComboBox)
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(OtoFesCodLabel)
                     .addGap(161, 161, 161)
-                    .addComponent(OtoFesCodTextField)
+                    .addComponent(OtoFesCodComboBox)
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -264,19 +304,19 @@ public class OtoListGUI extends javax.swing.JFrame {
                     .addComponent(OtoCodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(OtoPelCodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(OtoPelCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(OtoPelCodLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(OtoPreCodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(OtoPreCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(OtoPreCodLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                          .addComponent(OtoCerCodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addComponent(OtoCerCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                          .addComponent(OtoCerCodLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(OtoFesCodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(OtoFesCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                        .addComponent(OtoFesCodLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -339,10 +379,10 @@ public class OtoListGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = OtoCodTextField.getText();
-        array[1] = OtoPelCodTextField.getText();
-        array[2] = OtoPreCodTextField.getText();
-        array[3] = OtoCerCodTextField.getText();
-        array[4] = OtoFesCodTextField.getText();
+        array[1] = OtoPelCodComboBox.getSelectedItem().toString().substring(0,OtoPelCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[2] = OtoPreCodComboBox.getSelectedItem().toString().substring(0,OtoPreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[3] = OtoCerCodComboBox.getSelectedItem().toString().substring(0,OtoCerCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[4] = OtoFesCodComboBox.getSelectedItem().toString().substring(0,OtoFesCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[5] = OtoEstRegTextField.getText();
         
         // Send data to the controller to add it to the model
@@ -356,10 +396,10 @@ public class OtoListGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = OtoCodTextField.getText();
-        array[1] = OtoPelCodTextField.getText();
-        array[2] = OtoPreCodTextField.getText();
-        array[3] = OtoCerCodTextField.getText();
-        array[4] = OtoFesCodTextField.getText();
+        array[1] = OtoPelCodComboBox.getSelectedItem().toString().substring(0,OtoPelCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[2] = OtoPreCodComboBox.getSelectedItem().toString().substring(0,OtoPreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[3] = OtoCerCodComboBox.getSelectedItem().toString().substring(0,OtoCerCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[4] = OtoFesCodComboBox.getSelectedItem().toString().substring(0,OtoFesCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[5] = OtoEstRegTextField.getText();
 
         // Send data to the controller to remove it from the model
@@ -376,10 +416,10 @@ public class OtoListGUI extends javax.swing.JFrame {
     	 // TODO add your handling code here:
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = OtoCodTextField.getText();
-        array[1] = OtoPelCodTextField.getText();
-        array[2] = OtoPreCodTextField.getText();
-        array[3] = OtoCerCodTextField.getText();
-        array[4] = OtoFesCodTextField.getText();
+        array[1] = OtoPelCodComboBox.getSelectedItem().toString().substring(0,OtoPelCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[2] = OtoPreCodComboBox.getSelectedItem().toString().substring(0,OtoPreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[3] = OtoCerCodComboBox.getSelectedItem().toString().substring(0,OtoCerCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[4] = OtoFesCodComboBox.getSelectedItem().toString().substring(0,OtoFesCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[5] = OtoEstRegTextField.getText();
 
         // Send data to the controller to activate it from the model
@@ -393,10 +433,10 @@ public class OtoListGUI extends javax.swing.JFrame {
     	 // TODO add your handling code here:
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = OtoCodTextField.getText();
-        array[1] = OtoPelCodTextField.getText();
-        array[2] = OtoPreCodTextField.getText();
-        array[3] = OtoCerCodTextField.getText();
-        array[4] = OtoFesCodTextField.getText();
+        array[1] = OtoPelCodComboBox.getSelectedItem().toString().substring(0,OtoPelCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[2] = OtoPreCodComboBox.getSelectedItem().toString().substring(0,OtoPreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[3] = OtoCerCodComboBox.getSelectedItem().toString().substring(0,OtoCerCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[4] = OtoFesCodComboBox.getSelectedItem().toString().substring(0,OtoFesCodComboBox.getSelectedItem().toString().indexOf(' ')); 
         array[5] = OtoEstRegTextField.getText();
 
         // Send data to the controller to inactivate it from the model
@@ -404,29 +444,24 @@ public class OtoListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_inactivateButtonActionPerformed
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	OtoPelCodTextField.enable();
     	OtoCodTextField.enable();
-    	OtoPreCodTextField.enable();
-    	OtoCerCodTextField.enable();
-    	OtoFesCodTextField.enable();
     	OtoEstRegTextField.enable();
-
+    	OtoPelCodComboBox.setSelectedIndex(0);
+    	OtoPreCodComboBox.setSelectedIndex(0);
+    	OtoCerCodComboBox.setSelectedIndex(0);
+    	OtoFesCodComboBox.setSelectedIndex(0);
     	OtoCodTextField.setText("");
-    	OtoPelCodTextField.setText("");
-    	OtoPreCodTextField.setText("");
-    	OtoCerCodTextField.setText("");
-    	OtoFesCodTextField.setText("");
     	OtoEstRegTextField.setText("");
     }
     // Code for the update button
     private void modButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	OtoPelCodTextField.disable();
+    	OtoCodTextField.disable();
     	String[] array = new String[jtable1.getColumnCount()];
         array[0] = OtoCodTextField.getText();
-        array[1] = OtoPelCodTextField.getText();
-        array[2] = OtoPreCodTextField.getText();
-        array[3] = OtoCerCodTextField.getText();
-        array[4] = OtoFesCodTextField.getText();
+        array[1] = OtoPelCodComboBox.getSelectedItem().toString().substring(0,OtoPelCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[2] = OtoPreCodComboBox.getSelectedItem().toString().substring(0,OtoPreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[3] = OtoCerCodComboBox.getSelectedItem().toString().substring(0,OtoCerCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[4] = OtoFesCodComboBox.getSelectedItem().toString().substring(0,OtoFesCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[5] = OtoEstRegTextField.getText();
 
         otoListTableController.updateRow(array, jtable1);
@@ -437,10 +472,10 @@ public class OtoListGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = OtoCodTextField.getText();
-        array[1] = OtoPelCodTextField.getText();
-        array[2] = OtoPreCodTextField.getText();
-        array[3] = OtoCerCodTextField.getText();
-        array[4] = OtoFesCodTextField.getText();
+        array[1] = OtoPelCodComboBox.getSelectedItem().toString().substring(0,OtoPelCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[2] = OtoPreCodComboBox.getSelectedItem().toString().substring(0,OtoPreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[3] = OtoCerCodComboBox.getSelectedItem().toString().substring(0,OtoCerCodComboBox.getSelectedItem().toString().indexOf(' ')); 
+        array[4] = OtoFesCodComboBox.getSelectedItem().toString().substring(0,OtoFesCodComboBox.getSelectedItem().toString().indexOf(' ')); 
         array[5] = OtoEstRegTextField.getText();
 
         // Send data to the controller to update it in the model
@@ -488,15 +523,16 @@ public class OtoListGUI extends javax.swing.JFrame {
     private javax.swing.JLabel OtoCodLabel;
     private javax.swing.JTextField OtoCodTextField;
     private javax.swing.JLabel OtoPelCodLabel;
-    private javax.swing.JTextField OtoPelCodTextField;
+    private javax.swing.JComboBox<String> OtoPelCodComboBox;
     private javax.swing.JLabel OtoPreCodLabel;
-    private javax.swing.JTextField OtoPreCodTextField;
+    private javax.swing.JComboBox<String> OtoPreCodComboBox;
     private javax.swing.JLabel OtoCerCodLabel;
-    private javax.swing.JTextField OtoCerCodTextField;
+    private javax.swing.JComboBox<String> OtoCerCodComboBox;
     private javax.swing.JLabel OtoFesCodLabel;
-    private javax.swing.JTextField OtoFesCodTextField;
+    private javax.swing.JComboBox<String> OtoFesCodComboBox;
     private javax.swing.JLabel OtoEstRegLabel;
     private javax.swing.JTextField OtoEstRegTextField;
+   
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton modButton;
     private javax.swing.JPanel jPanel1;
@@ -507,5 +543,68 @@ public class OtoListGUI extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+    Connection connection;
+    Statement statement;
     
+    void remplir_Jcomb() {
+    	String url="jdbc:mysql://localhost:3306/";
+    	String dbname="toadv2";
+    	String regla="?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    	String username="root";
+    	String pass="";
+        
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            System.err.println("Unable to find and load driver");
+            System.exit(1);
+        }
+        
+        try {
+            
+            connection = DriverManager.getConnection(url+dbname+regla,username,pass);
+        } catch (SQLException sqlerr) {
+            System.out.println(sqlerr.getMessage());
+            System.out.println(sqlerr.getSQLState());
+            System.out.println(sqlerr.getErrorCode());
+        }
+        
+        System.out.println("Connected Successfully");
+        
+        try {
+        	statement = connection.createStatement();
+        	
+            ResultSet rs1 = statement.executeQuery("SELECT PelCod, PelTitEsp FROM pelicula");
+            while (rs1.next()){
+            	OtoPelCodComboBox.addItem(rs1.getString(1)+ " - " + rs1.getString(2));
+            }
+            
+            ResultSet rs2 = statement.executeQuery("SELECT PreCod, PreNom FROM premio");
+            while (rs2.next()){
+            	OtoPreCodComboBox.addItem(rs2.getString(1)+ " - " + rs2.getString(2));
+            }
+            
+            ResultSet rs3 = statement.executeQuery("SELECT CerCod, CerNom FROM certamen");
+            while (rs3.next()){
+            	OtoCerCodComboBox.addItem(rs3.getString(1)+ " - " + rs3.getString(2));
+            }
+            
+            ResultSet rs4 = statement.executeQuery("SELECT FesCod, FesNom FROM festival");
+            while (rs4.next()){
+            	OtoFesCodComboBox.addItem(rs4.getString(1)+ " - " + rs4.getString(2));
+            }
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+        finally {
+        	try {
+        		statement.close();
+        		connection.close();
+            } catch (SQLException ex) {
+            	System.out.println(ex.getMessage());
+                System.out.println(ex.getSQLState());
+                System.out.println(ex.getErrorCode());
+            }
+        }
+    }
 }

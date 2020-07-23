@@ -1,4 +1,5 @@
 package certamen;
+
 import javax.sql.RowSetEvent;
 import javax.sql.RowSetListener;
 import javax.swing.JTable;
@@ -44,8 +45,8 @@ public class CerListTableController implements ListSelectionListener, RowSetList
             // Read the data in each column using getValue and display it on corresponding text field
             gui.setGenNameTextField((String) tableModel.getValueAt(firstIndex, 1));
             gui.setGenNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setGenCerFesCodTextField((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setGenCerOrgCodTextField((String) tableModel.getValueAt(firstIndex, 3));
+            gui.setCerFesCodJComboBox((String) tableModel.getValueAt(firstIndex, 2));
+            gui.setCerOrgCodJComboBox((String) tableModel.getValueAt(firstIndex, 3));
             gui.setGenCerEstRegTextField((String) tableModel.getValueAt(firstIndex, 4));
         }
     }
@@ -94,8 +95,8 @@ public class CerListTableController implements ListSelectionListener, RowSetList
             // Read the data in each column using getValueAt and display it on the corresponding text field
             gui.setGenNameTextField((String) tableModel.getValueAt(firstIndex, 1));
             gui.setGenNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setGenCerFesCodTextField((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setGenCerOrgCodTextField((String) tableModel.getValueAt(firstIndex, 3));
+            gui.setCerFesCodJComboBox((String) tableModel.getValueAt(firstIndex, 2));
+            gui.setCerOrgCodJComboBox((String) tableModel.getValueAt(firstIndex, 3));
             gui.setGenCerEstRegTextField((String) tableModel.getValueAt(firstIndex, 4));
 
         } catch (Exception exp) {

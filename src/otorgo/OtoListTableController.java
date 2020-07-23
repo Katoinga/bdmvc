@@ -43,11 +43,11 @@ public class OtoListTableController implements ListSelectionListener, RowSetList
                 return;
 
             // Read the data in each column using getValue and display it on corresponding text field
-            gui.setOtoPelCodTextField((String) tableModel.getValueAt(firstIndex, 1));
+            gui.setOtoPelCodJComboBox((String) tableModel.getValueAt(firstIndex, 1));
             gui.setOtoCodTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setOtoPreCodTextField((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setOtoCerCodTextField((String) tableModel.getValueAt(firstIndex, 3));
-            gui.setOtoFesCodTextField((String) tableModel.getValueAt(firstIndex, 4));
+            gui.setOtoPreCodJComboBox((String) tableModel.getValueAt(firstIndex, 2));
+            gui.setOtoCerCodJComboBox((String) tableModel.getValueAt(firstIndex, 3));
+            gui.setOtoFesCodJComboBox((String) tableModel.getValueAt(firstIndex, 4));
             gui.setOtoEstRegTextField((String) tableModel.getValueAt(firstIndex, 5));
         }
     }
@@ -94,11 +94,11 @@ public class OtoListTableController implements ListSelectionListener, RowSetList
             gui.updateTable();
 
             // Read the data in each column using getValueAt and display it on the corresponding text field
-            gui.setOtoPelCodTextField((String) tableModel.getValueAt(firstIndex, 1));
+            gui.setOtoPelCodJComboBox((String) tableModel.getValueAt(firstIndex, 1));
             gui.setOtoCodTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setOtoPreCodTextField((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setOtoCerCodTextField((String) tableModel.getValueAt(firstIndex, 3));
-            gui.setOtoFesCodTextField((String) tableModel.getValueAt(firstIndex, 4));
+            gui.setOtoPreCodJComboBox((String) tableModel.getValueAt(firstIndex, 2));
+            gui.setOtoCerCodJComboBox((String) tableModel.getValueAt(firstIndex, 3));
+            gui.setOtoFesCodJComboBox((String) tableModel.getValueAt(firstIndex, 4));
             gui.setOtoEstRegTextField((String) tableModel.getValueAt(firstIndex, 5));
 
         } catch (Exception exp) {

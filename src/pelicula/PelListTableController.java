@@ -49,7 +49,7 @@ public class PelListTableController implements ListSelectionListener, RowSetList
             gui.setPelAñoProTextField((String) tableModel.getValueAt(firstIndex, 3));
             gui.setPelPreTextField((String) tableModel.getValueAt(firstIndex, 4));
             gui.setPelDurTextField((String) tableModel.getValueAt(firstIndex, 5));
-            gui.setPelNacCodTextField((String) tableModel.getValueAt(firstIndex, 6));
+            gui.setPelNacCodJComboBox((String) tableModel.getValueAt(firstIndex, 6));
             gui.setPelEstRegTextField((String) tableModel.getValueAt(firstIndex, 7));
         }
     }
@@ -102,7 +102,7 @@ public class PelListTableController implements ListSelectionListener, RowSetList
             gui.setPelAñoProTextField((String) tableModel.getValueAt(firstIndex, 3));
             gui.setPelPreTextField((String) tableModel.getValueAt(firstIndex, 4));
             gui.setPelDurTextField((String) tableModel.getValueAt(firstIndex, 5));
-            gui.setPelNacCodTextField((String) tableModel.getValueAt(firstIndex, 6));
+            gui.setPelNacCodJComboBox((String) tableModel.getValueAt(firstIndex, 6));
             gui.setPelEstRegTextField((String) tableModel.getValueAt(firstIndex, 7));
 
 

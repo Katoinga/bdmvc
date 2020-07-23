@@ -168,8 +168,8 @@ public class PelListTableModel extends AbstractTableModel {
             if (!isPrimaryKeyInDB(array)) {
                 GenListRowSet.last();
                 GenListRowSet.moveToInsertRow();
-                GenListRowSet.updateString("PelTitEsp", (String) array[0]);
-                GenListRowSet.updateString("PelCod", (String) array[1]);
+                GenListRowSet.updateString("PelTitEsp", (String) array[1]);
+                GenListRowSet.updateString("PelCod", (String) array[0]);
                 GenListRowSet.updateString("PelTitIdi", (String) array[2]);
                 GenListRowSet.updateString("PelAñoPro", (String) array[3]);
                 GenListRowSet.updateString("PelPre", (String) array[4]);
@@ -237,8 +237,8 @@ public class PelListTableModel extends AbstractTableModel {
             // database, but the row's primary key is not being updated
             if (!isPrimaryKeyInDB(array) || desiredGenNumber.equals(selectedGenNumber)) {
                 GenListRowSet.absolute(jtable.getSelectedRow() + 1);
-                GenListRowSet.updateString("PelTitEsp", (String) array[0]);
-                GenListRowSet.updateString("PelCod", (String) array[1]);
+                GenListRowSet.updateString("PelTitEsp", (String) array[1]);
+                GenListRowSet.updateString("PelCod", (String) array[0]);
                 GenListRowSet.updateString("PelTitIdi", (String) array[2]);
                 GenListRowSet.updateString("PelAñoPro", (String) array[3]);
                 GenListRowSet.updateString("PelPre", (String) array[4]);

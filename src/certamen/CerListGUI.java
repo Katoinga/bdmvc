@@ -1,6 +1,14 @@
 package certamen;
-import java.awt.BorderLayout;
 
+
+import java.awt.BorderLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -52,18 +60,35 @@ public class CerListGUI extends javax.swing.JFrame {
 
     // Set data on the GenNumberTextField
     public void setGenNumberTextField(String value) { GenNumberTextField.setText(value); }
-
-    // Set data on the GenCerFesCodTextField
-    public void setGenCerFesCodTextField(String value) { GenCerFesCodTextField.setText(value); }
-
-    // Set data on the GenTipTarSexCodTextField
-    public void setGenCerOrgCodTextField(String value) { GenCerOrgCodTextField.setText(value); }
-
+    
     // Set data on the GenTipTarSexCodTextField
     public void setGenCerEstRegTextField(String value) { GenCerEstRegTextField.setText(value); }
+    
+    // Set data on the GenCerFesCodTextField
+    public void setCerFesCodJComboBox(String value) { 
+    	int size = CerFesCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(CerFesCodComboBox.getItemAt(c).toString().substring(0,CerFesCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			CerFesCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
+    
+    // Set data on the GenCerFesCodTextField
+    public void setCerOrgCodJComboBox(String value) { 
+    	int size = CerOrgCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(CerOrgCodComboBox.getItemAt(c).toString().substring(0,CerOrgCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			CerOrgCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
     // Set data on the enrollmentTextField
 
 
+    
     // Set data on the startDateTextField
 
 
@@ -88,10 +113,14 @@ public class CerListGUI extends javax.swing.JFrame {
 
         GenNameTextField = new javax.swing.JTextField();
         GenNumberTextField = new javax.swing.JTextField();
-        GenCerFesCodTextField = new javax.swing.JTextField();
-        GenCerOrgCodTextField = new javax.swing.JTextField();
+
+        
         GenCerEstRegTextField = new javax.swing.JTextField();
 
+        CerFesCodComboBox = new JComboBox<String>();
+        CerOrgCodComboBox = new JComboBox<String>();
+        remplir_Jcomb();
+        
         modButton =new javax.swing.JButton();
         actButton = new javax.swing.JButton();
         inactButton = new javax.swing.JButton();
@@ -193,13 +222,13 @@ public class CerListGUI extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(GenCerFesCodLabel)
                     .addGap(161, 161, 161)
-                    .addComponent(GenCerFesCodTextField)
+                    .addComponent(CerFesCodComboBox)
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(GenCerOrgCodLabel)
                     .addGap(161, 161, 161)
-                    .addComponent(GenCerOrgCodTextField)
+                    .addComponent(CerOrgCodComboBox)
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -255,11 +284,11 @@ public class CerListGUI extends javax.swing.JFrame {
                     .addComponent(GenNumberLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(GenCerFesCodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CerFesCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(GenCerFesCodLabel))
                     .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                          .addComponent(GenCerOrgCodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addComponent(CerOrgCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                          .addComponent(GenCerOrgCodLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -319,12 +348,14 @@ public class CerListGUI extends javax.swing.JFrame {
 
     // Code for the add button
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
+        
+    	
+    	// TODO add your handling code here:
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenCerFesCodTextField.getText();
-        array[3] = GenCerOrgCodTextField.getText();
+        array[2] = CerFesCodComboBox.getSelectedItem().toString().substring(0,CerFesCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = CerOrgCodComboBox.getSelectedItem().toString().substring(0,CerOrgCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[4] = GenCerEstRegTextField.getText();
 
         // Send data to the controller to add it to the model
@@ -339,8 +370,8 @@ public class CerListGUI extends javax.swing.JFrame {
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenCerFesCodTextField.getText();
-        array[3] = GenCerOrgCodTextField.getText();
+        array[2] = CerFesCodComboBox.getSelectedItem().toString().substring(0,CerFesCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = CerOrgCodComboBox.getSelectedItem().toString().substring(0,CerOrgCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[4] = GenCerEstRegTextField.getText();
 
         // Send data to the controller to remove it from the model
@@ -358,8 +389,8 @@ public class CerListGUI extends javax.swing.JFrame {
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenCerFesCodTextField.getText();
-        array[3] = GenCerOrgCodTextField.getText();
+        array[2] = CerFesCodComboBox.getSelectedItem().toString().substring(0,CerFesCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = CerOrgCodComboBox.getSelectedItem().toString().substring(0,CerOrgCodComboBox.getSelectedItem().toString().indexOf(' ')); 
         array[4] = GenCerEstRegTextField.getText();
 
         // Send data to the controller to activate it from the model
@@ -374,8 +405,8 @@ public class CerListGUI extends javax.swing.JFrame {
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenCerFesCodTextField.getText();
-        array[3] = GenCerOrgCodTextField.getText();
+        array[2] = CerFesCodComboBox.getSelectedItem().toString().substring(0,CerFesCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = CerOrgCodComboBox.getSelectedItem().toString().substring(0,CerOrgCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[4] = GenCerEstRegTextField.getText();
 
         // Send data to the controller to inactivate it from the model
@@ -385,15 +416,13 @@ public class CerListGUI extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	GenNumberTextField.enable();
     	GenNameTextField.enable();
-    	GenCerFesCodTextField.enable();
-    	GenCerOrgCodTextField.enable();
     	GenCerEstRegTextField.enable();
-
+    	CerFesCodComboBox.setSelectedIndex(0);
+    	CerOrgCodComboBox.setSelectedIndex(0);
     	GenNameTextField.setText("");
     	GenNumberTextField.setText("");
-    	GenCerFesCodTextField.setText("");
-    	GenCerOrgCodTextField.setText("");
-    	GenCerEstRegTextField.setText("");
+        GenCerEstRegTextField.setText("");
+        
     }
     // Code for the update button
     private void modButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -401,12 +430,12 @@ public class CerListGUI extends javax.swing.JFrame {
     	String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenCerFesCodTextField.getText();
-        array[3] = GenCerOrgCodTextField.getText();
+        array[2] = CerFesCodComboBox.getSelectedItem().toString().substring(0,CerFesCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = CerOrgCodComboBox.getSelectedItem().toString().substring(0,CerOrgCodComboBox.getSelectedItem().toString().indexOf(' ')); 
         array[4] = GenCerEstRegTextField.getText();
 
         cerListTableController.updateRow(array, jtable1);
-
+        
     }
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
@@ -414,8 +443,8 @@ public class CerListGUI extends javax.swing.JFrame {
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
-        array[2] = GenCerFesCodTextField.getText();
-        array[3] = GenCerOrgCodTextField.getText();
+        array[2] = CerFesCodComboBox.getSelectedItem().toString().substring(0,CerFesCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = CerOrgCodComboBox.getSelectedItem().toString().substring(0,CerOrgCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[4] = GenCerEstRegTextField.getText();
 
         // Send data to the controller to update it in the model
@@ -465,9 +494,9 @@ public class CerListGUI extends javax.swing.JFrame {
     private javax.swing.JLabel GenNumberLabel;
     private javax.swing.JTextField GenNumberTextField;
     private javax.swing.JLabel GenCerFesCodLabel;
-    private javax.swing.JTextField GenCerFesCodTextField;
+    private javax.swing.JComboBox<String> CerFesCodComboBox;
     private javax.swing.JLabel GenCerOrgCodLabel;
-    private javax.swing.JTextField GenCerOrgCodTextField;
+    private javax.swing.JComboBox<String> CerOrgCodComboBox;
     private javax.swing.JLabel GenCerEstRegLabel;
     private javax.swing.JTextField GenCerEstRegTextField;
     private javax.swing.JButton deleteButton;
@@ -480,5 +509,60 @@ public class CerListGUI extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+    Connection connection;
+    Statement statement;
+    
+    void remplir_Jcomb() {
+    	String url="jdbc:mysql://localhost:3306/";
+    	String dbname="toadv2";
+    	String regla="?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    	String username="root";
+    	String pass="";
+        
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            System.err.println("Unable to find and load driver");
+            System.exit(1);
+        }
+        
+        try {
+            
+            connection = DriverManager.getConnection(url+dbname+regla,username,pass);
+        } catch (SQLException sqlerr) {
+            System.out.println(sqlerr.getMessage());
+            System.out.println(sqlerr.getSQLState());
+            System.out.println(sqlerr.getErrorCode());
+        }
+        
+        System.out.println("Connected Successfully");
+        
+        try {
+        	statement = connection.createStatement();
+        	
+            ResultSet rs1 = statement.executeQuery("SELECT FesCod, FesNom FROM festival");
 
+            while (rs1.next()){
+            	CerFesCodComboBox.addItem(rs1.getString(1)+ " - " + rs1.getString(2));
+            }
+            
+            ResultSet rs2 = statement.executeQuery("SELECT OrgCod, OrgNom FROM organizacion");
+            while (rs2.next()){
+            	CerOrgCodComboBox.addItem(rs2.getString(1)+ " - " + rs2.getString(2));
+            }
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+        finally {
+        	try {
+        		statement.close();
+        		connection.close();
+            } catch (SQLException ex) {
+            	System.out.println(ex.getMessage());
+                System.out.println(ex.getSQLState());
+                System.out.println(ex.getErrorCode());
+            }
+        }
+    }
+        
 }

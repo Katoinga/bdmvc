@@ -1,6 +1,11 @@
 package pelicula;
 
 import java.awt.BorderLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -66,11 +71,19 @@ public class PelListGUI extends javax.swing.JFrame {
     // Set data on the GenTipTarSexCodTextField
     public void setPelDurTextField(String value) { PelDurTextField.setText(value); }
     
-    // Set data on the GenTipTarSexCodTextField
-    public void setPelNacCodTextField(String value) { PelNacCodTextField.setText(value); }
-    
  // Set data on the GenTipTarSexCodTextField
     public void setPelEstRegTextField(String value) { PelEstRegTextField.setText(value); }
+    
+  // Set data on the GenCerFesCodTextField
+    public void setPelNacCodJComboBox(String value) {
+    	int size = PelNacCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(PelNacCodComboBox.getItemAt(c).toString().substring(0,PelNacCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			PelNacCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
     
     // Set data on the enrollmentTextField
     
@@ -106,9 +119,11 @@ public class PelListGUI extends javax.swing.JFrame {
         PelAñoProTextField = new javax.swing.JTextField();
         PelPreTextField = new javax.swing.JTextField();
         PelDurTextField = new javax.swing.JTextField();
-        PelNacCodTextField = new javax.swing.JTextField();
         PelEstRegTextField = new javax.swing.JTextField();
         
+        PelNacCodComboBox = new javax.swing.JComboBox<String>();
+        remplir_Jcomb();
+
         modButton =new javax.swing.JButton();
         actButton = new javax.swing.JButton();
         inactButton = new javax.swing.JButton();
@@ -237,7 +252,7 @@ public class PelListGUI extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(PelNacCodLabel)
                     .addGap(161, 161, 161)
-                    .addComponent(PelNacCodTextField)
+                    .addComponent(PelNacCodComboBox)
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -309,7 +324,7 @@ public class PelListGUI extends javax.swing.JFrame {
                        .addComponent(PelDurLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(PelNacCodTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PelNacCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                        .addComponent(PelNacCodLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -377,7 +392,7 @@ public class PelListGUI extends javax.swing.JFrame {
         array[3] = PelAñoProTextField.getText();
         array[4] = PelPreTextField.getText();
         array[5] = PelDurTextField.getText();
-        array[6] = PelNacCodTextField.getText();
+        array[6] = PelNacCodComboBox.getSelectedItem().toString().substring(0,PelNacCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[7] = PelEstRegTextField.getText();
         
         // Send data to the controller to add it to the model
@@ -396,7 +411,7 @@ public class PelListGUI extends javax.swing.JFrame {
         array[3] = PelAñoProTextField.getText();
         array[4] = PelPreTextField.getText();
         array[5] = PelDurTextField.getText();
-        array[6] = PelNacCodTextField.getText();
+        array[6] = PelNacCodComboBox.getSelectedItem().toString().substring(0,PelNacCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[7] = PelEstRegTextField.getText();
 
         // Send data to the controller to remove it from the model
@@ -418,7 +433,7 @@ public class PelListGUI extends javax.swing.JFrame {
         array[3] = PelAñoProTextField.getText();
         array[4] = PelPreTextField.getText();
         array[5] = PelDurTextField.getText();
-        array[6] = PelNacCodTextField.getText();
+        array[6] = PelNacCodComboBox.getSelectedItem().toString().substring(0,PelNacCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[7] = PelEstRegTextField.getText();
 
         // Send data to the controller to activate it from the model
@@ -437,7 +452,7 @@ public class PelListGUI extends javax.swing.JFrame {
         array[3] = PelAñoProTextField.getText();
         array[4] = PelPreTextField.getText();
         array[5] = PelDurTextField.getText();
-        array[6] = PelNacCodTextField.getText();
+        array[6] = PelNacCodComboBox.getSelectedItem().toString().substring(0,PelNacCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[7] = PelEstRegTextField.getText();
 
         // Send data to the controller to inactivate it from the model
@@ -451,16 +466,14 @@ public class PelListGUI extends javax.swing.JFrame {
     	PelAñoProTextField.enable();
     	PelPreTextField.enable();
     	PelDurTextField.enable();
-    	PelNacCodTextField.enable();
     	PelEstRegTextField.enable();
-
+    	PelNacCodComboBox.setSelectedIndex(0);
     	PelCodTextField.setText("");
     	PelTitEspTextField.setText("");
     	PelTitIdiTextField.setText("");
     	PelAñoProTextField.setText("");
     	PelPreTextField.setText("");
     	PelDurTextField.setText("");
-    	PelNacCodTextField.setText("");
     	PelEstRegTextField.setText("");
     }
     // Code for the update button
@@ -473,7 +486,7 @@ public class PelListGUI extends javax.swing.JFrame {
         array[3] = PelAñoProTextField.getText();
         array[4] = PelPreTextField.getText();
         array[5] = PelDurTextField.getText();
-        array[6] = PelNacCodTextField.getText();
+        array[6] = PelNacCodComboBox.getSelectedItem().toString().substring(0,PelNacCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[7] = PelEstRegTextField.getText();
 
         PelListTableController.updateRow(array, jtable1);
@@ -489,7 +502,7 @@ public class PelListGUI extends javax.swing.JFrame {
         array[3] = PelAñoProTextField.getText();
         array[4] = PelPreTextField.getText();
         array[5] = PelDurTextField.getText();
-        array[6] = PelNacCodTextField.getText();
+        array[6] = PelNacCodComboBox.getSelectedItem().toString().substring(0,PelNacCodComboBox.getSelectedItem().toString().indexOf(' '));
         array[7] = PelEstRegTextField.getText();
 
         // Send data to the controller to update it in the model
@@ -547,7 +560,7 @@ public class PelListGUI extends javax.swing.JFrame {
     private javax.swing.JLabel PelDurLabel;
     private javax.swing.JTextField PelDurTextField;
     private javax.swing.JLabel PelNacCodLabel;
-    private javax.swing.JTextField PelNacCodTextField;
+    private javax.swing.JComboBox<String> PelNacCodComboBox;
     private javax.swing.JLabel PelEstRegLabel;
     private javax.swing.JTextField PelEstRegTextField;
     private javax.swing.JButton deleteButton;
@@ -560,5 +573,54 @@ public class PelListGUI extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+    Connection connection;
+    Statement statement;
     
+    void remplir_Jcomb() {
+    	String url="jdbc:mysql://localhost:3306/";
+    	String dbname="toadv2";
+    	String regla="?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    	String username="root";
+    	String pass="";
+        
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            System.err.println("Unable to find and load driver");
+            System.exit(1);
+        }
+        
+        try {
+            
+            connection = DriverManager.getConnection(url+dbname+regla,username,pass);
+        } catch (SQLException sqlerr) {
+            System.out.println(sqlerr.getMessage());
+            System.out.println(sqlerr.getSQLState());
+            System.out.println(sqlerr.getErrorCode());
+        }
+        
+        System.out.println("Connected Successfully");
+        
+        try {
+        	statement = connection.createStatement();
+        	
+            ResultSet rs1 = statement.executeQuery("SELECT NacCod, NacDes FROM nacionalidad");
+
+            while (rs1.next()){
+            	PelNacCodComboBox.addItem(rs1.getString(1)+ " - " + rs1.getString(2));
+            }
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+        finally {
+        	try {
+        		statement.close();
+        		connection.close();
+            } catch (SQLException ex) {
+            	System.out.println(ex.getMessage());
+                System.out.println(ex.getSQLState());
+                System.out.println(ex.getErrorCode());
+            }
+        }
+    }
 }

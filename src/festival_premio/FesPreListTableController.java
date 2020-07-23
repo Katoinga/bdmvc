@@ -45,8 +45,8 @@ public class FesPreListTableController implements ListSelectionListener, RowSetL
             // Read the data in each column using getValue and display it on corresponding text field
             gui.setGenNameTextField((String) tableModel.getValueAt(firstIndex, 1));
             gui.setGenNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setGenFesPreFesCodTextField((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setGenFesPrePreCodTextField((String) tableModel.getValueAt(firstIndex, 3));
+            gui.setFesPreFesCodJComboBox((String) tableModel.getValueAt(firstIndex, 2));
+            gui.setFesPrePreCodJComboBox((String) tableModel.getValueAt(firstIndex, 3));
             gui.setGenFesPreEstRegTextField((String) tableModel.getValueAt(firstIndex, 4));
         }
     }
@@ -95,8 +95,8 @@ public class FesPreListTableController implements ListSelectionListener, RowSetL
             // Read the data in each column using getValueAt and display it on the corresponding text field
             gui.setGenNameTextField((String) tableModel.getValueAt(firstIndex, 1));
             gui.setGenNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setGenFesPreFesCodTextField((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setGenFesPrePreCodTextField((String) tableModel.getValueAt(firstIndex, 3));
+            gui.setFesPreFesCodJComboBox((String) tableModel.getValueAt(firstIndex, 2));
+            gui.setFesPrePreCodJComboBox((String) tableModel.getValueAt(firstIndex, 3));
             gui.setGenFesPreEstRegTextField((String) tableModel.getValueAt(firstIndex, 4));
 
         } catch (Exception exp) {
