@@ -168,13 +168,16 @@ public class OtoListTableModel extends AbstractTableModel {
             if (!isPrimaryKeyInDB(array)) {
                 GenListRowSet.last();
                 GenListRowSet.moveToInsertRow();
-                GenListRowSet.updateString("OtoPelCod", (String) array[0]);
-                GenListRowSet.updateString("OtoCod", (String) array[1]);
+                GenListRowSet.updateString("OtoPelCod", (String) array[1]);
+                GenListRowSet.updateString("OtoCod", (String) array[0]);
                 GenListRowSet.updateString("OtoPreCod", (String) array[2]);
                 GenListRowSet.updateString("OtoCerCod", (String) array[3]);
                 GenListRowSet.updateString("OtoFesCod", (String) array[4]);
-                GenListRowSet.updateString("OtoEstReg", (String) array[5]);
-                
+                GenListRowSet.updateString("PreTarCod", (String) array[5]);
+                GenListRowSet.updateString("PelNacCod", (String) array[6]);
+                GenListRowSet.updateString("OrgCod", (String) array[7]);
+                GenListRowSet.updateString("OtoEstReg", (String) array[8]);
+
                 GenListRowSet.insertRow();
                 GenListRowSet.moveToCurrentRow();
                 GenListRowSet.acceptChanges(connection);
@@ -235,12 +238,15 @@ public class OtoListTableModel extends AbstractTableModel {
             // database, but the row's primary key is not being updated
             if (!isPrimaryKeyInDB(array) || desiredGenNumber.equals(selectedGenNumber)) {
                 GenListRowSet.absolute(jtable.getSelectedRow() + 1);
-                GenListRowSet.updateString("OtoPelCod", (String) array[0]);
-                GenListRowSet.updateString("OtoCod", (String) array[1]);
+                GenListRowSet.updateString("OtoPelCod", (String) array[1]);
+                GenListRowSet.updateString("OtoCod", (String) array[0]);
                 GenListRowSet.updateString("OtoPreCod", (String) array[2]);
                 GenListRowSet.updateString("OtoCerCod", (String) array[3]);
                 GenListRowSet.updateString("OtoFesCod", (String) array[4]);
-                GenListRowSet.updateString("OtoEstReg", (String) array[5]);
+                GenListRowSet.updateString("PreTarCod", (String) array[5]);
+                GenListRowSet.updateString("PelNacCod", (String) array[6]);
+                GenListRowSet.updateString("OrgCod", (String) array[7]);
+                GenListRowSet.updateString("OtoEstReg", (String) array[8]);
                 
                 GenListRowSet.updateRow();
                 GenListRowSet.first();

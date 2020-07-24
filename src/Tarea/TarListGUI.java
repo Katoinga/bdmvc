@@ -51,11 +51,6 @@ public class TarListGUI extends javax.swing.JFrame {
         jtable1.setModel(tarListTableController.getTableModel());
     }
 
-    // Set data on the TarNameTextField
-    public void setTipTarCodComboBox(String value) {
-    	TipTarCodComboBox.setSelectedItem(value);
-    }
-
     // Set data on the TarNumberTextField
     public void setTarNumberTextField(String value) { TarNumberTextField.setText(value); }
     
@@ -83,14 +78,12 @@ public class TarListGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        TipTarCodLabel = new javax.swing.JLabel();
         TarNumberLabel = new javax.swing.JLabel();
         TarEstRegLabel = new javax.swing.JLabel();
         
         TarSexCodLabel = new javax.swing.JLabel();
         TarSexCodComboBox= new javax.swing.JComboBox<String>();
         
-        TipTarCodComboBox = new javax.swing.JComboBox<String>();
         TarNumberTextField = new javax.swing.JTextField();
         TarEstRegTextField = new javax.swing.JTextField();
         modButton =new javax.swing.JButton();
@@ -109,7 +102,6 @@ public class TarListGUI extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TarNumberLabel.setText("Codigo:");
-        TipTarCodLabel.setText("TipoTarea(CODIGO):");
         TarSexCodLabel.setText("Genero(CODIGO):");
 
         TarEstRegLabel.setText("Estado del Registro:");
@@ -194,12 +186,6 @@ public class TarListGUI extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(TipTarCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(TipTarCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
                     .addComponent(TarSexCodLabel)
                     .addGap(148, 148, 148)
                     .addComponent(TarSexCodComboBox)
@@ -250,10 +236,6 @@ public class TarListGUI extends javax.swing.JFrame {
                     .addComponent(TarNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TarNumberLabel))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TipTarCodLabel)
-                        .addComponent(TipTarCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
                  .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TarSexCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TarSexCodLabel))
@@ -317,11 +299,10 @@ public class TarListGUI extends javax.swing.JFrame {
     // Code for the add button
     private void addButtoTartionTarformed(java.awt.event.ActionEvent evt) {//Tar-FIRST:event_addButtoTartionTarformed
         // TODO add your handling code here:
-    	String[] tiptar= TipTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] tarsex= TarSexCodComboBox.getSelectedItem().toString().split(" ");
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TarNumberTextField.getText();
-        array[1] = tiptar[0];
+        array[1] = returnQuery("tipo_tarea","TipTarSexCod","TipTarCod",tarsex[0]);
         array[2] = tarsex[0];
         array[3] = TarEstRegTextField.getText();
         
@@ -334,11 +315,11 @@ public class TarListGUI extends javax.swing.JFrame {
     // TarListTableController.java (LINE 65) and CouseListTableModel.java (LINE 149)
     private void deleteButtoTartionTarformed(java.awt.event.ActionEvent evt) {//Tar-FIRST:event_deleteButtoTartionTarformed
         // TODO add your handling code here:
-    	String[] tiptar= TipTarCodComboBox.getSelectedItem().toString().split(" ");
+
     	String[] tarsex= TarSexCodComboBox.getSelectedItem().toString().split(" ");
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TarNumberTextField.getText();
-        array[1] = tiptar[0];
+
         array[2] = tarsex[0];
         array[3] = TarEstRegTextField.getText();
         
@@ -355,11 +336,10 @@ public class TarListGUI extends javax.swing.JFrame {
     // TarListTableController.java (LINE 66) and CouseListTableModel.java (LINE 248)
     private void actButtoTartionTarformed(java.awt.event.ActionEvent evt) {
     	 // TODO add your handling code here:
-    	String[] tiptar= TipTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] tarsex= TarSexCodComboBox.getSelectedItem().toString().split(" ");
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TarNumberTextField.getText();
-        array[1] = tiptar[0];
+
         array[2] = tarsex[0];
         array[3] = TarEstRegTextField.getText();
         
@@ -373,11 +353,10 @@ public class TarListGUI extends javax.swing.JFrame {
     // TarListTableController.java (LINE 71) and CouseListTableModel.java (LINE 268)
     private void inactButtoTartionTarformed(java.awt.event.ActionEvent evt) {
     	 // TODO add your handling code here:
-    	String[] tiptar= TipTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] tarsex= TarSexCodComboBox.getSelectedItem().toString().split(" ");
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TarNumberTextField.getText();
-        array[1] = tiptar[0];
+
         array[2] = tarsex[0];
         array[3] = TarEstRegTextField.getText();
         
@@ -395,11 +374,10 @@ public class TarListGUI extends javax.swing.JFrame {
     // Code for the update button
     private void modButtoTartionTarformed(java.awt.event.ActionEvent evt) {
     	TarNumberTextField.disable();
-    	String[] tiptar= TipTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] tarsex= TarSexCodComboBox.getSelectedItem().toString().split(" ");
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TarNumberTextField.getText();
-        array[1] = tiptar[0];
+
         array[2] = tarsex[0];
         array[3] = TarEstRegTextField.getText();
         
@@ -409,11 +387,10 @@ public class TarListGUI extends javax.swing.JFrame {
     
     private void updateButtoTartionTarformed(java.awt.event.ActionEvent evt) {//Tar-FIRST:event_updateButtoTartionTarformed
         // TODO add your handling code here:
-    	String[] tiptar= TipTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] tarsex= TarSexCodComboBox.getSelectedItem().toString().split(" ");
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TarNumberTextField.getText();
-        array[1] = tiptar[0];
+
         array[2] = tarsex[0];
         array[3] = TarEstRegTextField.getText();
         
@@ -460,8 +437,6 @@ public class TarListGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//Tar-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JLabel TarListLabel;
-    private javax.swing.JLabel TipTarCodLabel;
-    private javax.swing.JComboBox<String> TipTarCodComboBox;
     private javax.swing.JLabel TarNumberLabel;
     private javax.swing.JTextField TarNumberTextField;
     private javax.swing.JLabel TarEstRegLabel;
@@ -507,12 +482,6 @@ public class TarListGUI extends javax.swing.JFrame {
         
         try {
         	statement = connection.createStatement();
-        	
-            ResultSet rs1 = statement.executeQuery("SELECT TipTarCod, TipTarDes FROM tipo_tarea");
-
-            while (rs1.next()){
-            	TipTarCodComboBox.addItem(rs1.getString(1)+" - "+rs1.getString(2));
-            }
             
             ResultSet rs2 = statement.executeQuery("SELECT SexCod, SexNom FROM sexo");
             while (rs2.next()){
@@ -531,5 +500,53 @@ public class TarListGUI extends javax.swing.JFrame {
                 System.out.println(ex.getErrorCode());
             }
         }
+    }
+    String returnQuery(String tabla, String colOri, String colDest, String data) {
+    	String url="jdbc:mysql://localhost:3306/";
+    	String dbname="toadv2";
+    	String regla="?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    	String username="root";
+    	String pass="";
+        String ret = "";
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            System.err.println("Unable to find and load driver");
+            System.exit(1);
+        }
+        
+        try {
+            
+            connection = DriverManager.getConnection(url+dbname+regla,username,pass);
+        } catch (SQLException sqlerr) {
+            System.out.println(sqlerr.getMessage());
+            System.out.println(sqlerr.getSQLState());
+            System.out.println(sqlerr.getErrorCode());
+        }
+        
+        System.out.println("Connected Successfully");
+        
+        try {
+        	statement = connection.createStatement();
+        	
+            ResultSet rs1 = statement.executeQuery("SELECT "+colDest+" FROM "+ tabla + " WHERE " + colOri + " = " + data);
+            while (rs1.next()){
+            	 ret = rs1.getString(1);
+            }
+            
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+        finally {
+        	try {
+        		statement.close();
+        		connection.close();
+            } catch (SQLException ex) {
+            	System.out.println(ex.getMessage());
+                System.out.println(ex.getSQLState());
+                System.out.println(ex.getErrorCode());
+            }
+        }
+        return ret;
     }
 }

@@ -65,7 +65,15 @@ public class PreListGUI extends javax.swing.JFrame {
     public void setPreNumberTextField(String value) { PreNumberTextField.setText(value); }
     
     // Set data on the PreEstRegTextField
-    public void setPreTarCodComboBox(String value) { PreTarCodComboBox.setSelectedItem(value); }
+    public void setPreTarCodComboBox(String value) { 
+    	int size = PreTarCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(PreTarCodComboBox.getItemAt(c).toString().substring(0,PreTarCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			PreTarCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
 
     public void setPreEstRegTextField(String value) { PreEstRegTextField.setText(value); }
 
@@ -389,6 +397,9 @@ public class PreListGUI extends javax.swing.JFrame {
     	PreNumberTextField.enable();
     	PreNameTextField.enable();
     	PreEstRegTextField.enable();
+    	
+    	PreTarCodComboBox.setSelectedItem(0);
+    	
     	PreNameTextField.setText("");
     	PreNumberTextField.setText("");
     	PreEstRegTextField.setText("");

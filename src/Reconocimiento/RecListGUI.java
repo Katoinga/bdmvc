@@ -56,15 +56,34 @@ public class RecListGUI extends javax.swing.JFrame {
 
     // Set data on the RecNumberTextField
     public void setRecNumberTextField(String value) { RecNumberTextField.setText(value); }
-    public void setRecPerCodComboBox(String value) { RecPerCodComboBox.setSelectedItem(value);}
-    public void setRecCerCodComboBox(String value) { RecCerCodComboBox.setSelectedItem(value); }
-    public void setRecFesPreCodComboBox(String value) { RecFesPreCodComboBox.setSelectedItem(value); }
-    public void setPerNacCodComboBox(String value) { PerNacCodComboBox.setSelectedItem(value);}
-    public void setFesPreFesCodComboBox(String value) { FesPreFesCodComboBox.setSelectedItem(value);}
-    public void setFesPrePreCodComboBox(String value) { FesPrePreCodComboBox.setSelectedItem(value);}
-    public void setTarCodComboBox(String value) { TarCodComboBox.setSelectedItem(value); }
-    public void setOrgCodComboBox(String value) { OrgCodComboBox.setSelectedItem(value);}
-    public void setSexCodComboBox(String value) { SexCodComboBox.setSelectedItem(value);}
+    
+    public void setRecPerCodComboBox(String value) { 
+    	int size = RecPerCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(RecPerCodComboBox.getItemAt(c).toString().substring(0,RecPerCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			RecPerCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
+    public void setRecCerCodComboBox(String value) {
+    	int size = RecCerCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(RecCerCodComboBox.getItemAt(c).toString().substring(0,RecCerCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			RecCerCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
+    public void setRecFesPreCodComboBox(String value) {
+    	int size = RecFesPreCodComboBox.getItemCount();
+    	for(int c=0; c<size; c++) {
+    		if(RecFesPreCodComboBox.getItemAt(c).toString().substring(0,RecFesPreCodComboBox.getItemAt(c).toString().indexOf(' ')).equals(value)) {
+    			RecFesPreCodComboBox.setSelectedIndex(c);
+    			break;
+    		}
+    	}
+    }
     
     // Set data on the RecEstRegTextField
     
@@ -98,18 +117,6 @@ public class RecListGUI extends javax.swing.JFrame {
         RecCerCodComboBox = new javax.swing.JComboBox<String>();
         RecFesPreCodLabel = new javax.swing.JLabel();
         RecFesPreCodComboBox = new javax.swing.JComboBox<String>();
-        PerNacCodLabel = new javax.swing.JLabel();
-        PerNacCodComboBox = new javax.swing.JComboBox<String>();
-        FesPreFesCodLabel = new javax.swing.JLabel();
-        FesPreFesCodComboBox = new javax.swing.JComboBox<String>();
-        FesPrePreCodLabel = new javax.swing.JLabel();
-        FesPrePreCodComboBox = new javax.swing.JComboBox<String>();
-        TarCodLabel = new javax.swing.JLabel();
-        TarCodComboBox = new javax.swing.JComboBox<String>();
-        OrgCodLabel = new javax.swing.JLabel();
-        OrgCodComboBox = new javax.swing.JComboBox<String>();
-        SexCodLabel = new javax.swing.JLabel();
-        SexCodComboBox = new javax.swing.JComboBox<String>();
         
         RecNumberTextField = new javax.swing.JTextField();
         RecEstRegTextField = new javax.swing.JTextField();
@@ -132,12 +139,6 @@ public class RecListGUI extends javax.swing.JFrame {
         RecPerCodLabel.setText("Personaje(Codigo):");
         RecCerCodLabel.setText("Certamen(Codigo):");
         RecFesPreCodLabel.setText("Festival-Premio(Codigo):");
-        PerNacCodLabel.setText("PersonajeNacionalidad(Codigo):");
-        FesPreFesCodLabel.setText("FestivalPremio(Codigo):");
-        FesPrePreCodLabel.setText("Premio(Codigo):");
-        TarCodLabel.setText("Tarea(CODIGO):");
-        OrgCodLabel.setText("Organizacion(CODIGO):");
-        SexCodLabel.setText("Genero(CODIGO):");
         
         RecEstRegLabel.setText("Estado del Registro:");
         
@@ -239,42 +240,6 @@ public class RecListGUI extends javax.swing.JFrame {
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(PerNacCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(PerNacCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(FesPreFesCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(FesPreFesCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(FesPrePreCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(FesPrePreCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(TarCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(TarCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(OrgCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(OrgCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(SexCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(SexCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
                     .addComponent(RecEstRegLabel)
                     .addGap(148, 148, 148)
                     .addComponent(RecEstRegTextField)
@@ -332,30 +297,6 @@ public class RecListGUI extends javax.swing.JFrame {
                                 .addComponent(RecFesPreCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(RecFesPreCodLabel))
                             .addGap(18, 18, 18)
-                  .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(PerNacCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PerNacCodLabel))
-                                .addGap(18, 18, 18)
-                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                         .addComponent(FesPreFesCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addComponent(FesPreFesCodLabel))
-                     .addGap(18, 18, 18)
-                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                         .addComponent(FesPrePreCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addComponent(FesPrePreCodLabel))
-                     .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TarCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TarCodLabel))
-                    .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(OrgCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(OrgCodLabel))
-                    .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(SexCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(SexCodLabel))
-                    .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(RecEstRegTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(RecEstRegLabel))
@@ -415,28 +356,19 @@ public class RecListGUI extends javax.swing.JFrame {
     // Code for the add button
     private void addButtoRectionRecformed(java.awt.event.ActionEvent evt) {//Rec-FIRST:event_addButtoRectionRecformed
         // TODO add your handling code here:
-    	String[] recper= RecPerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] reccer= RecCerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] recfespre= RecFesPreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] PerNacCod= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPreFes= FesPreFesCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPrePreCod= FesPrePreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] OrgCod= OrgCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] SexCod= SexCodComboBox.getSelectedItem().toString().split(" ");
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = RecNumberTextField.getText();
-        array[1] = recper[0];
-        array[2] = reccer[0];
-        array[3] = recfespre[0];
-        array[4] = PerNacCod[0];
-        array[5] = FesPreFes[0];
-        array[6] = FesPrePreCod[0];
-        array[7] = (String) TarCodComboBox.getSelectedItem();
-        array[8] = OrgCod[0];
-        array[9] = SexCod[0];
+        array[1] = RecPerCodComboBox.getSelectedItem().toString().substring(0,RecPerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[2] = RecCerCodComboBox.getSelectedItem().toString().substring(0,RecCerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = RecFesPreCodComboBox.getSelectedItem().toString().substring(0,RecFesPreCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[1]);
+        array[5] = returnQuery("festival_premio","FesPreCod","FesPreFesCod",array[3]);
+        array[6] = returnQuery("festival_premio","FesPreCod","FesPrePreCod",array[3]);
+        array[7] = returnQuery("festival_premio","FesPreCod","TarCod",array[3]);
+        array[8] = returnQuery("certamen","CerCod","CerOrgCod",array[2]);
+        array[9] = returnQuery("personaje","PerCod","PerSexCod",array[1]);
         array[10] = RecEstRegTextField.getText();
-
         
         // Send data to the controller to add it to the model
         recListTableController.addRow(array);
@@ -447,27 +379,17 @@ public class RecListGUI extends javax.swing.JFrame {
     // RecListTableController.java (LINE 65) and CouseListTableModel.java (LINE 149)
     private void deleteButtoRectionRecformed(java.awt.event.ActionEvent evt) {//Rec-FIRST:event_deleteButtoRectionRecformed
         // TODO add your handling code here:
-    	String[] recper= RecPerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] reccer= RecCerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] recfespre= RecFesPreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] PerNacCod= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPreFes= FesPreFesCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPrePreCod= FesPrePreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] TarCod= TarCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] OrgCod= OrgCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] SexCod= SexCodComboBox.getSelectedItem().toString().split(" ");
-
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = RecNumberTextField.getText();
-        array[1] = recper[0];
-        array[2] = reccer[0];
-        array[3] = recfespre[0];
-        array[4] = PerNacCod[0];
-        array[5] = FesPreFes[0];
-        array[6] = FesPrePreCod[0];
-        array[7] = TarCod[0];
-        array[8] = OrgCod[0];
-        array[9] = SexCod[0];
+        array[1] = RecPerCodComboBox.getSelectedItem().toString().substring(0,RecPerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[2] = RecCerCodComboBox.getSelectedItem().toString().substring(0,RecCerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = RecFesPreCodComboBox.getSelectedItem().toString().substring(0,RecFesPreCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[1]);
+        array[5] = returnQuery("festival_premio","FesPreCod","FesPreFesCod",array[3]);
+        array[6] = returnQuery("festival_premio","FesPreCod","FesPrePreCod",array[3]);
+        array[7] = returnQuery("festival_premio","FesPreCod","TarCod",array[3]);
+        array[8] = returnQuery("certamen","CerCod","CerOrgCod",array[2]);
+        array[9] = returnQuery("personaje","PerCod","PerSexCod",array[1]);
         array[10] = RecEstRegTextField.getText();
         // Send data to the controller to remove it from the model
         recListTableController.deleteRow(array);
@@ -481,27 +403,17 @@ public class RecListGUI extends javax.swing.JFrame {
     // RecListTableController.java (LINE 66) and CouseListTableModel.java (LINE 248)
     private void actButtoRectionRecformed(java.awt.event.ActionEvent evt) {
     	 // TODO add your handling code here:
-    	String[] recper= RecPerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] reccer= RecCerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] recfespre= RecFesPreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] PerNacCod= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPreFes= FesPreFesCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPrePreCod= FesPrePreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] TarCod= TarCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] OrgCod= OrgCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] SexCod= SexCodComboBox.getSelectedItem().toString().split(" ");
-
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = RecNumberTextField.getText();
-        array[1] = recper[0];
-        array[2] = reccer[0];
-        array[3] = recfespre[0];
-        array[4] = PerNacCod[0];
-        array[5] = FesPreFes[0];
-        array[6] = FesPrePreCod[0];
-        array[7] = TarCod[0];
-        array[8] = OrgCod[0];
-        array[9] = SexCod[0];
+        array[1] = RecPerCodComboBox.getSelectedItem().toString().substring(0,RecPerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[2] = RecCerCodComboBox.getSelectedItem().toString().substring(0,RecCerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = RecFesPreCodComboBox.getSelectedItem().toString().substring(0,RecFesPreCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[1]);
+        array[5] = returnQuery("festival_premio","FesPreCod","FesPreFesCod",array[3]);
+        array[6] = returnQuery("festival_premio","FesPreCod","FesPrePreCod",array[3]);
+        array[7] = returnQuery("festival_premio","FesPreCod","TarCod",array[3]);
+        array[8] = returnQuery("certamen","CerCod","CerOrgCod",array[2]);
+        array[9] = returnQuery("personaje","PerCod","PerSexCod",array[1]);
         array[10] = RecEstRegTextField.getText();
         
         // Send data to the controller to activate it from the model
@@ -513,27 +425,18 @@ public class RecListGUI extends javax.swing.JFrame {
     // RecListTableController.java (LINE 71) and CouseListTableModel.java (LINE 268)
     private void inactButtoRectionRecformed(java.awt.event.ActionEvent evt) {
     	 // TODO add your handling code here:
-    	String[] recper= RecPerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] reccer= RecCerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] recfespre= RecFesPreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] PerNacCod= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPreFes= FesPreFesCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPrePreCod= FesPrePreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] TarCod= TarCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] OrgCod= OrgCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] SexCod= SexCodComboBox.getSelectedItem().toString().split(" ");
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = RecNumberTextField.getText();
-        array[1] = recper[0];
-        array[2] = reccer[0];
-        array[3] = recfespre[0];
-        array[4] = PerNacCod[0];
-        array[5] = FesPreFes[0];
-        array[6] = FesPrePreCod[0];
-        array[7] = TarCod[0];
-        array[8] = OrgCod[0];
-        array[9] = SexCod[0];
+        array[1] = RecPerCodComboBox.getSelectedItem().toString().substring(0,RecPerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[2] = RecCerCodComboBox.getSelectedItem().toString().substring(0,RecCerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = RecFesPreCodComboBox.getSelectedItem().toString().substring(0,RecFesPreCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[1]);
+        array[5] = returnQuery("festival_premio","FesPreCod","FesPreFesCod",array[3]);
+        array[6] = returnQuery("festival_premio","FesPreCod","FesPrePreCod",array[3]);
+        array[7] = returnQuery("festival_premio","FesPreCod","TarCod",array[3]);
+        array[8] = returnQuery("certamen","CerCod","CerOrgCod",array[2]);
+        array[9] = returnQuery("personaje","PerCod","PerSexCod",array[1]);
         array[10] = RecEstRegTextField.getText();
         // Send data to the controller to inactivate it from the model
         recListTableController.inactivateRow(array);
@@ -541,8 +444,11 @@ public class RecListGUI extends javax.swing.JFrame {
     
     private void cancelButtoRectionRecformed(java.awt.event.ActionEvent evt) {
     	RecNumberTextField.enable();
-    	
     	RecEstRegTextField.enable();
+    	
+    	RecPerCodComboBox.setSelectedIndex(0);
+    	RecCerCodComboBox.setSelectedIndex(0);
+    	RecFesPreCodComboBox.setSelectedIndex(0);
     	
     	RecNumberTextField.setText("");
     	RecEstRegTextField.setText("");
@@ -550,27 +456,18 @@ public class RecListGUI extends javax.swing.JFrame {
     // Code for the update button
     private void modButtoRectionRecformed(java.awt.event.ActionEvent evt) {
     	RecNumberTextField.disable();
-    	String[] recper= RecPerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] reccer= RecCerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] recfespre= RecFesPreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] PerNacCod= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPreFes= FesPreFesCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPrePreCod= FesPrePreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] TarCod= TarCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] OrgCod= OrgCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] SexCod= SexCodComboBox.getSelectedItem().toString().split(" ");
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = RecNumberTextField.getText();
-        array[1] = recper[0];
-        array[2] = reccer[0];
-        array[3] = recfespre[0];
-        array[4] = PerNacCod[0];
-        array[5] = FesPreFes[0];
-        array[6] = FesPrePreCod[0];
-        array[7] = TarCod[0];
-        array[8] = OrgCod[0];
-        array[9] = SexCod[0];
+        array[1] = RecPerCodComboBox.getSelectedItem().toString().substring(0,RecPerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[2] = RecCerCodComboBox.getSelectedItem().toString().substring(0,RecCerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = RecFesPreCodComboBox.getSelectedItem().toString().substring(0,RecFesPreCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[1]);
+        array[5] = returnQuery("festival_premio","FesPreCod","FesPreFesCod",array[3]);
+        array[6] = returnQuery("festival_premio","FesPreCod","FesPrePreCod",array[3]);
+        array[7] = returnQuery("festival_premio","FesPreCod","TarCod",array[3]);
+        array[8] = returnQuery("certamen","CerCod","CerOrgCod",array[2]);
+        array[9] = returnQuery("personaje","PerCod","PerSexCod",array[1]);
         array[10] = RecEstRegTextField.getText();
         recListTableController.updateRow(array, jtable1);
         
@@ -578,27 +475,19 @@ public class RecListGUI extends javax.swing.JFrame {
     
     private void updateButtoRectionRecformed(java.awt.event.ActionEvent evt) {//Rec-FIRST:event_updateButtoRectionRecformed
         // TODO add your handling code here:
-    	String[] recper= RecPerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] reccer= RecCerCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] recfespre= RecFesPreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] PerNacCod= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPreFes= FesPreFesCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] FesPrePreCod= FesPrePreCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] TarCod= TarCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] OrgCod= OrgCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] SexCod= SexCodComboBox.getSelectedItem().toString().split(" ");
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = RecNumberTextField.getText();
-        array[1] = recper[0];
-        array[2] = reccer[0];
-        array[3] = recfespre[0];
-        array[4] = PerNacCod[0];
-        array[5] = FesPreFes[0];
-        array[6] = FesPrePreCod[0];
-        array[7] = (String) TarCodComboBox.getSelectedItem();
-        array[8] = OrgCod[0];
-        array[9] = SexCod[0];
+        array[1] = RecPerCodComboBox.getSelectedItem().toString().substring(0,RecPerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[2] = RecCerCodComboBox.getSelectedItem().toString().substring(0,RecCerCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[3] = RecFesPreCodComboBox.getSelectedItem().toString().substring(0,RecFesPreCodComboBox.getSelectedItem().toString().indexOf(' '));
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[1]);
+        array[5] = returnQuery("festival_premio","FesPreCod","FesPreFesCod",array[3]);
+        array[6] = returnQuery("festival_premio","FesPreCod","FesPrePreCod",array[3]);
+        array[7] = returnQuery("festival_premio","FesPreCod","TarCod",array[3]);
+        array[8] = returnQuery("certamen","CerCod","CerOrgCod",array[2]);
+        array[9] = returnQuery("personaje","PerCod","PerSexCod",array[1]);
+        array[10] = RecEstRegTextField.getText();
         array[10] = RecEstRegTextField.getText();
         
         // Send data to the controller to update it in the model
@@ -662,18 +551,6 @@ public class RecListGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> RecCerCodComboBox;
     private javax.swing.JLabel RecFesPreCodLabel;
     private javax.swing.JComboBox<String> RecFesPreCodComboBox;
-    private javax.swing.JLabel PerNacCodLabel;
-    private javax.swing.JComboBox<String> PerNacCodComboBox;
-    private javax.swing.JLabel FesPreFesCodLabel;
-    private javax.swing.JComboBox<String> FesPreFesCodComboBox;
-    private javax.swing.JLabel FesPrePreCodLabel;
-    private javax.swing.JComboBox<String> FesPrePreCodComboBox;
-    private javax.swing.JLabel TarCodLabel;
-    private javax.swing.JComboBox<String> TarCodComboBox;
-    private javax.swing.JLabel OrgCodLabel;
-    private javax.swing.JComboBox<String> OrgCodComboBox;
-    private javax.swing.JLabel SexCodLabel;
-    private javax.swing.JComboBox<String> SexCodComboBox;
 
      // End of variables declaration//Rec-END:variables
     Connection connection;
@@ -720,30 +597,6 @@ public class RecListGUI extends javax.swing.JFrame {
 
             while (rs3.next()){
             	RecFesPreCodComboBox.addItem(rs3.getString(1)+" - "+rs3.getString(2));
-            	FesPreFesCodComboBox.addItem(rs3.getString(1)+" - "+rs3.getString(2));
-            	FesPrePreCodComboBox.addItem(rs3.getString(1)+" - "+rs3.getString(2));
-
-            }
-            ResultSet rs4 = statement.executeQuery("SELECT NacCod, NacDes FROM nacionalidad");
-
-            while (rs4.next()){
-            	PerNacCodComboBox.addItem(rs4.getString(1)+" - "+rs4.getString(2));
-            }
-            
-            ResultSet rs6 = statement.executeQuery("SELECT TarCod FROM tarea");
-
-            while (rs6.next()){
-            	TarCodComboBox.addItem(rs6.getString(1));
-            }
-            ResultSet rs7 = statement.executeQuery("SELECT OrgCod, OrgNom FROM organizacion");
-
-            while (rs7.next()){
-            	OrgCodComboBox.addItem(rs7.getString(1)+" - "+rs7.getString(2));
-            }
-            ResultSet rs8 = statement.executeQuery("SELECT SexCod, SexNom FROM Sexo");
-
-            while (rs8.next()){
-            	SexCodComboBox.addItem(rs8.getString(1)+" - "+rs8.getString(2));
             }
             
         } catch (SQLException exp) {
@@ -759,5 +612,53 @@ public class RecListGUI extends javax.swing.JFrame {
                 System.out.println(ex.getErrorCode());
             }
         }
+    }
+    String returnQuery(String tabla, String colOri, String colDest, String data) {
+    	String url="jdbc:mysql://localhost:3306/";
+    	String dbname="toadv2";
+    	String regla="?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    	String username="root";
+    	String pass="";
+        String ret = "";
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            System.err.println("Unable to find and load driver");
+            System.exit(1);
+        }
+        
+        try {
+            
+            connection = DriverManager.getConnection(url+dbname+regla,username,pass);
+        } catch (SQLException sqlerr) {
+            System.out.println(sqlerr.getMessage());
+            System.out.println(sqlerr.getSQLState());
+            System.out.println(sqlerr.getErrorCode());
+        }
+        
+        System.out.println("Connected Successfully");
+        
+        try {
+        	statement = connection.createStatement();
+        	
+            ResultSet rs1 = statement.executeQuery("SELECT "+colDest+" FROM "+ tabla + " WHERE " + colOri + " = " + data);
+            while (rs1.next()){
+            	 ret = rs1.getString(1);
+            }
+            
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+        finally {
+        	try {
+        		statement.close();
+        		connection.close();
+            } catch (SQLException ex) {
+            	System.out.println(ex.getMessage());
+                System.out.println(ex.getSQLState());
+                System.out.println(ex.getErrorCode());
+            }
+        }
+        return ret;
     }
 }

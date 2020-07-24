@@ -82,6 +82,7 @@ public class FesPreListGUI extends javax.swing.JFrame {
 		}
 	    }
 	  }
+    
     // Set data on the enrollmentTextField
 
 
@@ -106,7 +107,7 @@ public class FesPreListGUI extends javax.swing.JFrame {
         GenFesPreFesCodLabel = new javax.swing.JLabel();
         GenFesPrePreCodLabel = new javax.swing.JLabel();
         GenFesPreEstRegLabel = new javax.swing.JLabel();
-
+        
         GenNameTextField = new javax.swing.JTextField();
         GenNumberTextField = new javax.swing.JTextField();
         GenFesPreEstRegTextField = new javax.swing.JTextField();
@@ -348,7 +349,8 @@ public class FesPreListGUI extends javax.swing.JFrame {
         array[1] = GenNumberTextField.getText();
         array[2] = FesPreFesCodComboBox.getSelectedItem().toString().substring(0,FesPreFesCodComboBox.getSelectedItem().toString().indexOf(' ')); 
         array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' '));
-        array[4] = GenFesPreEstRegTextField.getText();
+        array[4] = returnQuery("premio","PreCod","PreTarCod",array[3]);
+        array[5] = GenFesPreEstRegTextField.getText();
 
         // Send data to the controller to add it to the model
         fesPreListTableController.addRow(array);
@@ -363,8 +365,9 @@ public class FesPreListGUI extends javax.swing.JFrame {
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
         array[2] = FesPreFesCodComboBox.getSelectedItem().toString().substring(0,FesPreFesCodComboBox.getSelectedItem().toString().indexOf(' ')); 
-        array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
-        array[4] = GenFesPreEstRegTextField.getText();
+        array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' '));
+
+        array[5] = GenFesPreEstRegTextField.getText();
 
         // Send data to the controller to remove it from the model
         fesPreListTableController.deleteRow(array);
@@ -382,8 +385,9 @@ public class FesPreListGUI extends javax.swing.JFrame {
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
         array[2] = FesPreFesCodComboBox.getSelectedItem().toString().substring(0,FesPreFesCodComboBox.getSelectedItem().toString().indexOf(' ')); 
-        array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
-        array[4] = GenFesPreEstRegTextField.getText();
+        array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' '));
+
+        array[5] = GenFesPreEstRegTextField.getText();
 
         // Send data to the controller to activate it from the model
         fesPreListTableController.activateRow(array);
@@ -398,8 +402,9 @@ public class FesPreListGUI extends javax.swing.JFrame {
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
         array[2] = FesPreFesCodComboBox.getSelectedItem().toString().substring(0,FesPreFesCodComboBox.getSelectedItem().toString().indexOf(' ')); 
-        array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
-        array[4] = GenFesPreEstRegTextField.getText();
+        array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' '));
+
+        array[5] = GenFesPreEstRegTextField.getText();
 
         // Send data to the controller to inactivate it from the model
         fesPreListTableController.inactivateRow(array);
@@ -411,6 +416,7 @@ public class FesPreListGUI extends javax.swing.JFrame {
     	GenFesPreEstRegTextField.enable();
     	FesPreFesCodComboBox.setSelectedIndex(0);
     	FesPrePreCodComboBox.setSelectedIndex(0);
+
     	GenNameTextField.setText("");
     	GenNumberTextField.setText("");
     	GenFesPreEstRegTextField.setText("");
@@ -419,11 +425,12 @@ public class FesPreListGUI extends javax.swing.JFrame {
     private void modButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	GenNumberTextField.disable();
     	String[] array = new String[jtable1.getColumnCount()];
-        array[0] = GenNameTextField.getText();
+    	array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
         array[2] = FesPreFesCodComboBox.getSelectedItem().toString().substring(0,FesPreFesCodComboBox.getSelectedItem().toString().indexOf(' ')); 
         array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' '));
-        array[4] = GenFesPreEstRegTextField.getText();
+
+        array[5] = GenFesPreEstRegTextField.getText();
 
         fesPreListTableController.updateRow(array, jtable1);
 
@@ -435,8 +442,9 @@ public class FesPreListGUI extends javax.swing.JFrame {
         array[0] = GenNameTextField.getText();
         array[1] = GenNumberTextField.getText();
         array[2] = FesPreFesCodComboBox.getSelectedItem().toString().substring(0,FesPreFesCodComboBox.getSelectedItem().toString().indexOf(' ')); 
-        array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' ')); 
-        array[4] = GenFesPreEstRegTextField.getText();
+        array[3] = FesPrePreCodComboBox.getSelectedItem().toString().substring(0,FesPrePreCodComboBox.getSelectedItem().toString().indexOf(' '));
+
+        array[5] = GenFesPreEstRegTextField.getText();
 
         // Send data to the controller to update it in the model
         fesPreListTableController.updateRow(array, jtable1);
@@ -541,6 +549,7 @@ public class FesPreListGUI extends javax.swing.JFrame {
             while (rs2.next()){
             	FesPrePreCodComboBox.addItem(rs2.getString(1)+ " - " + rs2.getString(2));
             }
+            
         } catch (SQLException exp) {
             exp.printStackTrace();
         }
@@ -554,5 +563,54 @@ public class FesPreListGUI extends javax.swing.JFrame {
                 System.out.println(ex.getErrorCode());
             }
         }
+    }
+    
+    String returnQuery(String tabla, String colOri, String colDest, String data) {
+    	String url="jdbc:mysql://localhost:3306/";
+    	String dbname="toadv2";
+    	String regla="?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    	String username="root";
+    	String pass="";
+        String ret = "";
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            System.err.println("Unable to find and load driver");
+            System.exit(1);
+        }
+        
+        try {
+            
+            connection = DriverManager.getConnection(url+dbname+regla,username,pass);
+        } catch (SQLException sqlerr) {
+            System.out.println(sqlerr.getMessage());
+            System.out.println(sqlerr.getSQLState());
+            System.out.println(sqlerr.getErrorCode());
+        }
+        
+        System.out.println("Connected Successfully");
+        
+        try {
+        	statement = connection.createStatement();
+        	
+            ResultSet rs1 = statement.executeQuery("SELECT "+colDest+" FROM "+ tabla + " WHERE " + colOri + " = " + data);
+            while (rs1.next()){
+            	 ret = rs1.getString(1);
+            }
+            
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+        finally {
+        	try {
+        		statement.close();
+        		connection.close();
+            } catch (SQLException ex) {
+            	System.out.println(ex.getMessage());
+                System.out.println(ex.getSQLState());
+                System.out.println(ex.getErrorCode());
+            }
+        }
+        return ret;
     }
 }

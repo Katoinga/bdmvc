@@ -46,11 +46,8 @@ public class TraListTableController implements ListSelectionListener, RowSetList
             gui.setTraNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
             gui.setTraTarCodComboBox((String) tableModel.getValueAt(firstIndex, 1));
             gui.setTraPerCodComboBox((String) tableModel.getValueAt(firstIndex, 2));      
-            gui.setTraPelCodComboBox((String) tableModel.getValueAt(firstIndex, 3));      
-            gui.setPerNacCodComboBox((String) tableModel.getValueAt(firstIndex, 4));      
-            gui.setPelNacCodComboBox((String) tableModel.getValueAt(firstIndex, 5));      
-            gui.setSexCodComboBox((String) tableModel.getValueAt(firstIndex, 6));      
-            gui.setTraEstRegTextField((String) tableModel.getValueAt(firstIndex, 7));
+            gui.setTraPelCodComboBox((String) tableModel.getValueAt(firstIndex, 3));            
+            gui.setTraEstRegTextField((String) tableModel.getValueAt(firstIndex, 4));
 
         }
     }
@@ -100,11 +97,8 @@ public class TraListTableController implements ListSelectionListener, RowSetList
             gui.setTraNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
             gui.setTraTarCodComboBox((String) tableModel.getValueAt(firstIndex, 1));
             gui.setTraPerCodComboBox((String) tableModel.getValueAt(firstIndex, 2));      
-            gui.setTraPelCodComboBox((String) tableModel.getValueAt(firstIndex, 3));      
-            gui.setPerNacCodComboBox((String) tableModel.getValueAt(firstIndex, 4));      
-            gui.setPelNacCodComboBox((String) tableModel.getValueAt(firstIndex, 5));      
-            gui.setSexCodComboBox((String) tableModel.getValueAt(firstIndex, 6));      
-            gui.setTraEstRegTextField((String) tableModel.getValueAt(firstIndex, 7));
+            gui.setTraPelCodComboBox((String) tableModel.getValueAt(firstIndex, 3));            
+            gui.setTraEstRegTextField((String) tableModel.getValueAt(firstIndex, 4));
         } catch (Exception exp) {
             exp.getMessage();
             exp.printStackTrace();

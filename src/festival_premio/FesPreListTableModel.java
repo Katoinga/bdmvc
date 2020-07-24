@@ -172,7 +172,8 @@ public class FesPreListTableModel extends AbstractTableModel {
                 GenListRowSet.updateString("FesPreCod", (String) array[1]);
                 GenListRowSet.updateString("FesPreFesCod", (String) array[2]);
                 GenListRowSet.updateString("FesPrePreCod", (String) array[3]);
-                GenListRowSet.updateString("FesPreEstReg", (String) array[4]);
+                GenListRowSet.updateString("TarCod", (String) array[4]);
+                GenListRowSet.updateString("FesPreEstReg", (String) array[5]);
                 
                 GenListRowSet.insertRow();
                 GenListRowSet.moveToCurrentRow();
@@ -238,7 +239,8 @@ public class FesPreListTableModel extends AbstractTableModel {
                 GenListRowSet.updateString("FesPreCod", (String) array[1]);
                 GenListRowSet.updateString("FesPreFesCod", (String) array[2]);
                 GenListRowSet.updateString("FesPrePreCod", (String) array[3]);
-                GenListRowSet.updateString("FesPreEstReg", (String) array[4]);
+                GenListRowSet.updateString("TarCod", (String) array[4]);
+                GenListRowSet.updateString("FesPreEstReg", (String) array[5]);
                 
                 GenListRowSet.updateRow();
                 GenListRowSet.first();

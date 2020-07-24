@@ -44,9 +44,8 @@ public class TarListTableController implements ListSelectionListener, RowSetList
             // Read the data in each column using getValue and display it on corresponding text field
             
             gui.setTarNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setTipTarCodComboBox((String) tableModel.getValueAt(firstIndex, 1));
-            gui.setTarSexCodComboBox((String) tableModel.getValueAt(firstIndex, 2));      
-            gui.setTarEstRegTextField((String) tableModel.getValueAt(firstIndex, 3));
+            gui.setTarSexCodComboBox((String) tableModel.getValueAt(firstIndex, 1));      
+            gui.setTarEstRegTextField((String) tableModel.getValueAt(firstIndex, 2));
 
         }
     }
@@ -94,9 +93,8 @@ public class TarListTableController implements ListSelectionListener, RowSetList
 
             // Read the data in each column using getValueAt and display it on the corresponding text field
             gui.setTarNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
-            gui.setTipTarCodComboBox((String) tableModel.getValueAt(firstIndex, 1));
-            gui.setTarSexCodComboBox((String) tableModel.getValueAt(firstIndex, 2));      
-            gui.setTarEstRegTextField((String) tableModel.getValueAt(firstIndex, 3));
+            gui.setTarSexCodComboBox((String) tableModel.getValueAt(firstIndex, 1));      
+            gui.setTarEstRegTextField((String) tableModel.getValueAt(firstIndex, 2));
         } catch (Exception exp) {
             exp.getMessage();
             exp.printStackTrace();

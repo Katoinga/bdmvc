@@ -46,14 +46,8 @@ public class RecListTableController implements ListSelectionListener, RowSetList
             gui.setRecNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
             gui.setRecPerCodComboBox((String) tableModel.getValueAt(firstIndex, 1));
             gui.setRecCerCodComboBox((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setRecFesPreCodComboBox((String) tableModel.getValueAt(firstIndex, 3));
-            gui.setPerNacCodComboBox((String) tableModel.getValueAt(firstIndex, 4));
-            gui.setFesPreFesCodComboBox((String) tableModel.getValueAt(firstIndex, 5));
-            gui.setFesPrePreCodComboBox((String) tableModel.getValueAt(firstIndex, 6));
-            gui.setTarCodComboBox((String) tableModel.getValueAt(firstIndex, 7));
-            gui.setOrgCodComboBox((String) tableModel.getValueAt(firstIndex, 8));
-            gui.setSexCodComboBox((String) tableModel.getValueAt(firstIndex, 9));            
-            gui.setRecEstRegTextField((String) tableModel.getValueAt(firstIndex, 10));
+            gui.setRecFesPreCodComboBox((String) tableModel.getValueAt(firstIndex, 3));           
+            gui.setRecEstRegTextField((String) tableModel.getValueAt(firstIndex, 4));
 
         }
     }
@@ -103,14 +97,8 @@ public class RecListTableController implements ListSelectionListener, RowSetList
             gui.setRecNumberTextField((String) tableModel.getValueAt(firstIndex, 0));
             gui.setRecPerCodComboBox((String) tableModel.getValueAt(firstIndex, 1));
             gui.setRecCerCodComboBox((String) tableModel.getValueAt(firstIndex, 2));
-            gui.setRecFesPreCodComboBox((String) tableModel.getValueAt(firstIndex, 3));
-            gui.setPerNacCodComboBox((String) tableModel.getValueAt(firstIndex, 4));
-            gui.setFesPreFesCodComboBox((String) tableModel.getValueAt(firstIndex, 5));
-            gui.setFesPrePreCodComboBox((String) tableModel.getValueAt(firstIndex, 6));
-            gui.setTarCodComboBox((String) tableModel.getValueAt(firstIndex, 7));
-            gui.setOrgCodComboBox((String) tableModel.getValueAt(firstIndex, 8));
-            gui.setSexCodComboBox((String) tableModel.getValueAt(firstIndex, 9));            
-            gui.setRecEstRegTextField((String) tableModel.getValueAt(firstIndex, 10));
+            gui.setRecFesPreCodComboBox((String) tableModel.getValueAt(firstIndex, 3));           
+            gui.setRecEstRegTextField((String) tableModel.getValueAt(firstIndex, 4));
         } catch (Exception exp) {
             exp.getMessage();
             exp.printStackTrace();

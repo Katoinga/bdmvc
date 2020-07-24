@@ -63,9 +63,6 @@ public class TraListGUI extends javax.swing.JFrame {
     public void setTraSexCodComboBox(String value) { TraTarCodComboBox.setSelectedItem(value); }
     public void setTraPerCodComboBox(String value) { TraPerCodComboBox.setSelectedItem(value);  }
     public void setTraPelCodComboBox(String value) { TraPelCodComboBox.setSelectedItem(value); }
-    public void setPerNacCodComboBox(String value) { PerNacCodComboBox.setSelectedItem(value); }
-    public void setPelNacCodComboBox(String value) { PelNacCodComboBox.setSelectedItem(value);  }
-    public void setSexCodComboBox(String value) { SexCodComboBox.setSelectedItem(value);  }
 
     public void setTraEstRegTextField(String value) { TraEstRegTextField.setText(value); }
 
@@ -96,12 +93,6 @@ public class TraListGUI extends javax.swing.JFrame {
         TraPerCodComboBox = new javax.swing.JComboBox<String>();
         TraPelCodLabel = new javax.swing.JLabel();
         TraPelCodComboBox = new javax.swing.JComboBox<String>();
-        PerNacCodLabel = new javax.swing.JLabel();
-        PerNacCodComboBox = new javax.swing.JComboBox<String>();
-        PelNacCodLabel = new javax.swing.JLabel();
-        PelNacCodComboBox = new javax.swing.JComboBox<String>();
-        SexCodLabel = new javax.swing.JLabel();
-        SexCodComboBox = new javax.swing.JComboBox<String>();
         TraTarCodComboBox = new javax.swing.JComboBox<String>();
         TraNumberTextField = new javax.swing.JTextField();
         TraEstRegTextField = new javax.swing.JTextField();
@@ -124,9 +115,6 @@ public class TraListGUI extends javax.swing.JFrame {
         TraTarCodLabel.setText("TrabajoTarea(CODIGO):");
         TraPerCodLabel.setText("TrabajoPersona(CODIGO):");
         TraPelCodLabel.setText("TrabajoPelicula(CODIGO):");
-        PerNacCodLabel.setText("PersonajeNacionalidad(CODIGO):");
-        PelNacCodLabel.setText("PeliculaNacionalidad(CODIGO):");
-        SexCodLabel.setText("Genero(CODIGO):");
 
         TraEstRegLabel.setText("Estado del Registro:");
         
@@ -228,24 +216,6 @@ public class TraListGUI extends javax.swing.JFrame {
                     .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(PerNacCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(PerNacCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(PelNacCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(PelNacCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(SexCodLabel)
-                    .addGap(148, 148, 148)
-                    .addComponent(SexCodComboBox)
-                    .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
                     .addComponent(TraEstRegLabel)
                     .addGap(148, 148, 148)
                     .addComponent(TraEstRegTextField)
@@ -301,18 +271,6 @@ public class TraListGUI extends javax.swing.JFrame {
                        .addComponent(TraPelCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                        .addComponent(TraPelCodLabel))
                    .addGap(18, 18, 18) 
-               .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                       .addComponent(PerNacCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                       .addComponent(PerNacCodLabel))
-                   .addGap(18, 18, 18)
-               .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                       .addComponent(PelNacCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                       .addComponent(PelNacCodLabel))
-                   .addGap(18, 18, 18)
-               .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                       .addComponent(SexCodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                       .addComponent(SexCodLabel))
-                   .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(TraEstRegTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(TraEstRegLabel))
@@ -374,18 +332,16 @@ public class TraListGUI extends javax.swing.JFrame {
     	String[] tratar= TraTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] traper= TraPerCodComboBox.getSelectedItem().toString().split(" ");
     	String[] trapel= TraPelCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pernac= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pelnac= PelNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] sexcod= SexCodComboBox.getSelectedItem().toString().split(" ");
+
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TraNumberTextField.getText();
         array[1] = tratar[0];
         array[2] = traper[0];
         array[3] = trapel[0];
-        array[4] = pernac[0];
-        array[5] = pelnac[0];
-        array[6] = sexcod[0];
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[2]);
+        array[5] = returnQuery("pelicula","PelCod","PelNacCod",array[3]);
+        array[6] = returnQuery("personaje","PerCod","PerSexCod",array[2]);
         array[7] = TraEstRegTextField.getText();
         
         // Send data to the controller to add it to the model
@@ -400,18 +356,16 @@ public class TraListGUI extends javax.swing.JFrame {
     	String[] tratar= TraTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] traper= TraPerCodComboBox.getSelectedItem().toString().split(" ");
     	String[] trapel= TraPelCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pernac= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pelnac= PelNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] sexcod= SexCodComboBox.getSelectedItem().toString().split(" ");
+
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TraNumberTextField.getText();
         array[1] = tratar[0];
         array[2] = traper[0];
         array[3] = trapel[0];
-        array[4] = pernac[0];
-        array[5] = pelnac[0];
-        array[6] = sexcod[0];
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[2]);
+        array[5] = returnQuery("pelicula","PelCod","PelNacCod",array[3]);
+        array[6] = returnQuery("personaje","PerCod","PerSexCod",array[2]);
         array[7] = TraEstRegTextField.getText();
         
 
@@ -430,18 +384,16 @@ public class TraListGUI extends javax.swing.JFrame {
     	String[] tratar= TraTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] traper= TraPerCodComboBox.getSelectedItem().toString().split(" ");
     	String[] trapel= TraPelCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pernac= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pelnac= PelNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] sexcod= SexCodComboBox.getSelectedItem().toString().split(" ");
+
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TraNumberTextField.getText();
         array[1] = tratar[0];
         array[2] = traper[0];
         array[3] = trapel[0];
-        array[4] = pernac[0];
-        array[5] = pelnac[0];
-        array[6] = sexcod[0];
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[2]);
+        array[5] = returnQuery("pelicula","PelCod","PelNacCod",array[3]);
+        array[6] = returnQuery("personaje","PerCod","PerSexCod",array[2]);
         array[7] = TraEstRegTextField.getText();
         
         
@@ -457,18 +409,16 @@ public class TraListGUI extends javax.swing.JFrame {
     	String[] tratar= TraTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] traper= TraPerCodComboBox.getSelectedItem().toString().split(" ");
     	String[] trapel= TraPelCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pernac= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pelnac= PelNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] sexcod= SexCodComboBox.getSelectedItem().toString().split(" ");
+
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TraNumberTextField.getText();
         array[1] = tratar[0];
         array[2] = traper[0];
         array[3] = trapel[0];
-        array[4] = pernac[0];
-        array[5] = pelnac[0];
-        array[6] = sexcod[0];
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[2]);
+        array[5] = returnQuery("pelicula","PelCod","PelNacCod",array[3]);
+        array[6] = returnQuery("personaje","PerCod","PerSexCod",array[2]);
         array[7] = TraEstRegTextField.getText();
         
         
@@ -488,18 +438,16 @@ public class TraListGUI extends javax.swing.JFrame {
     	String[] tratar= TraTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] traper= TraPerCodComboBox.getSelectedItem().toString().split(" ");
     	String[] trapel= TraPelCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pernac= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pelnac= PelNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] sexcod= SexCodComboBox.getSelectedItem().toString().split(" ");
+
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TraNumberTextField.getText();
         array[1] = tratar[0];
         array[2] = traper[0];
         array[3] = trapel[0];
-        array[4] = pernac[0];
-        array[5] = pelnac[0];
-        array[6] = sexcod[0];
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[2]);
+        array[5] = returnQuery("pelicula","PelCod","PelNacCod",array[3]);
+        array[6] = returnQuery("personaje","PerCod","PerSexCod",array[2]);
         array[7] = TraEstRegTextField.getText();
         
         traListTableController.updateRow(array, jtable1);
@@ -511,18 +459,16 @@ public class TraListGUI extends javax.swing.JFrame {
     	String[] tratar= TraTarCodComboBox.getSelectedItem().toString().split(" ");
     	String[] traper= TraPerCodComboBox.getSelectedItem().toString().split(" ");
     	String[] trapel= TraPelCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pernac= PerNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] pelnac= PelNacCodComboBox.getSelectedItem().toString().split(" ");
-    	String[] sexcod= SexCodComboBox.getSelectedItem().toString().split(" ");
+
 
         String[] array = new String[jtable1.getColumnCount()];
         array[0] = TraNumberTextField.getText();
         array[1] = tratar[0];
         array[2] = traper[0];
         array[3] = trapel[0];
-        array[4] = pernac[0];
-        array[5] = pelnac[0];
-        array[6] = sexcod[0];
+        array[4] = returnQuery("personaje","PerCod","PerNacCod",array[2]);
+        array[5] = returnQuery("pelicula","PelCod","PelNacCod",array[3]);
+        array[6] = returnQuery("personaje","PerCod","PerSexCod",array[2]);
         array[7] = TraEstRegTextField.getText();
         
         
@@ -587,12 +533,6 @@ public class TraListGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> TraPerCodComboBox;
     private javax.swing.JLabel TraPelCodLabel;
     private javax.swing.JComboBox<String> TraPelCodComboBox;
-    private javax.swing.JLabel PerNacCodLabel;
-    private javax.swing.JComboBox<String> PerNacCodComboBox;
-    private javax.swing.JLabel PelNacCodLabel;
-    private javax.swing.JComboBox<String> PelNacCodComboBox;
-    private javax.swing.JLabel SexCodLabel;
-    private javax.swing.JComboBox<String> SexCodComboBox;
     
     // End of variables declaration//Tra-END:variables
     Connection connection;
@@ -639,18 +579,6 @@ public class TraListGUI extends javax.swing.JFrame {
             while (rs3.next()){
             	TraPelCodComboBox.addItem(rs3.getString(1)+" - "+rs3.getString(2));
             }
-            ResultSet rs4 = statement.executeQuery("SELECT PerNacCod, PerNom FROM personaje");
-            while (rs4.next()){
-            	PerNacCodComboBox.addItem(rs4.getString(1)+" - "+rs4.getString(2));
-            }
-            ResultSet rs5 = statement.executeQuery("SELECT PelNacCod, PelTitEsp FROM pelicula");
-            while (rs5.next()){
-            	PelNacCodComboBox.addItem(rs5.getString(1)+" - "+rs5.getString(2));
-            }
-            ResultSet rs6 = statement.executeQuery("SELECT SexCod, SexNom FROM sexo");
-            while (rs6.next()){
-            	SexCodComboBox.addItem(rs6.getString(1)+" - "+rs6.getString(2));
-            }
         } catch (SQLException exp) {
             exp.printStackTrace();
         }
@@ -664,5 +592,53 @@ public class TraListGUI extends javax.swing.JFrame {
                 System.out.println(ex.getErrorCode());
             }
         }
+    }
+    String returnQuery(String tabla, String colOri, String colDest, String data) {
+    	String url="jdbc:mysql://localhost:3306/";
+    	String dbname="toadv2";
+    	String regla="?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    	String username="root";
+    	String pass="";
+        String ret = "";
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            System.err.println("Unable to find and load driver");
+            System.exit(1);
+        }
+        
+        try {
+            
+            connection = DriverManager.getConnection(url+dbname+regla,username,pass);
+        } catch (SQLException sqlerr) {
+            System.out.println(sqlerr.getMessage());
+            System.out.println(sqlerr.getSQLState());
+            System.out.println(sqlerr.getErrorCode());
+        }
+        
+        System.out.println("Connected Successfully");
+        
+        try {
+        	statement = connection.createStatement();
+        	
+            ResultSet rs1 = statement.executeQuery("SELECT "+colDest+" FROM "+ tabla + " WHERE " + colOri + " = " + data);
+            while (rs1.next()){
+            	 ret = rs1.getString(1);
+            }
+            
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+        finally {
+        	try {
+        		statement.close();
+        		connection.close();
+            } catch (SQLException ex) {
+            	System.out.println(ex.getMessage());
+                System.out.println(ex.getSQLState());
+                System.out.println(ex.getErrorCode());
+            }
+        }
+        return ret;
     }
 }
