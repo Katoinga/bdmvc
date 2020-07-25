@@ -32,10 +32,10 @@ public class PelListGUI extends javax.swing.JFrame {
     public void addJTable() {
         // Add the data and column names to a JTable
         jtable1 = new JTable(PelListTableController.getTableModel());
-    
+        
         // Add a ListSelectionListener to the table
         jtable1.getSelectionModel().addListSelectionListener(PelListTableController);
-        
+
         // Add the table to a scrollpane
         JScrollPane scrollpane = new JScrollPane(jtable1);
         
@@ -43,7 +43,7 @@ public class PelListGUI extends javax.swing.JFrame {
         // This was originally jPanel
         jPanel2.setLayout(new BorderLayout());
         jPanel2.add(scrollpane, BorderLayout.CENTER);
-
+        
         // User can only select one row at a time
         jtable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -225,11 +225,13 @@ public class PelListGUI extends javax.swing.JFrame {
                     .addComponent(PelTitEspTextField))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(PelTitIdiLabel)
-                    .addGap(161, 161, 161)
-                    .addComponent(PelTitIdiTextField)
-                    .addContainerGap())
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PelTitIdiLabel))
+                .addGap(161, 161, 161)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PelTitIdiTextField))
+                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(PelAñoProLabel)
@@ -348,7 +350,7 @@ public class PelListGUI extends javax.swing.JFrame {
                          .addComponent(exitButton)
                  )
                 .addGap(42, 42, 42)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -378,7 +380,6 @@ public class PelListGUI extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
