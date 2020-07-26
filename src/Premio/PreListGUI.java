@@ -293,12 +293,12 @@ public class PreListGUI extends javax.swing.JFrame {
                          .addComponent(exitButton)
                  )
                 .addGap(42, 42, 42)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PreListLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        PreListLabel.setText("Presonajes");
+        PreListLabel.setText("Premio");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -521,10 +521,10 @@ public class PreListGUI extends javax.swing.JFrame {
         try {
         	statement = connection.createStatement();
         	
-            ResultSet rs1 = statement.executeQuery("SELECT TarCod FROM tarea");
+            ResultSet rs1 = statement.executeQuery("SELECT T.TarCod,A.TipTarDes FROM tarea T,tipo_tarea A WHERE T.TipTarCod=A.TipTarCod");
 
             while (rs1.next()){
-            	PreTarCodComboBox.addItem(rs1.getString(1)+" Tarea");
+            	PreTarCodComboBox.addItem(rs1.getString(1)+" - "+rs1.getString(2));
             }
             
         } catch (SQLException exp) {

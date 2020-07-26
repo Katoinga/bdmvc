@@ -112,9 +112,9 @@ public class TraListGUI extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TraNumberLabel.setText("Codigo:");
-        TraTarCodLabel.setText("TrabajoTarea(CODIGO):");
-        TraPerCodLabel.setText("TrabajoPersona(CODIGO):");
-        TraPelCodLabel.setText("TrabajoPelicula(CODIGO):");
+        TraTarCodLabel.setText("Codigo de Tarea:");
+        TraPerCodLabel.setText("Codigo de personaje:");
+        TraPelCodLabel.setText("codigo de pelicula:");
 
         TraEstRegLabel.setText("Estado del Registro:");
         
@@ -292,12 +292,12 @@ public class TraListGUI extends javax.swing.JFrame {
                          .addComponent(exitButton)
                  )
                 .addGap(42, 42, 42)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TraListLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        TraListLabel.setText("Tareas");
+        TraListLabel.setText("Trabajo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -565,10 +565,10 @@ public class TraListGUI extends javax.swing.JFrame {
         try {
         	statement = connection.createStatement();
         	
-            ResultSet rs1 = statement.executeQuery("SELECT TarCod FROM tarea");
+        	ResultSet rs1 = statement.executeQuery("SELECT T.TarCod,A.TipTarDes FROM tarea T,tipo_tarea A WHERE T.TipTarCod=A.TipTarCod");
 
             while (rs1.next()){
-            	TraTarCodComboBox.addItem(rs1.getString(1)+" - "+"tarea");
+            	TraTarCodComboBox.addItem(rs1.getString(1)+" - "+rs1.getString(2));
             }
             
             ResultSet rs2 = statement.executeQuery("SELECT PerCod, PerNom FROM personaje");
